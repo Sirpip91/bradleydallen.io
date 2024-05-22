@@ -1,6 +1,8 @@
 # bradleydallen.io
 Center for Computer Science Knowledge and Programming Information. This website is currently under construction.
 
+# The Blog
+
 
 # Technologies:
 Next.js REACT Framework:  https://nextjs.org/ <br>
