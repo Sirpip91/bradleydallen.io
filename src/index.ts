@@ -1,7 +1,12 @@
 import { serve } from '@hono/node-server'
 import { Hono } from 'hono'
+import "dotenv/config";
+import Stripe from 'stripe';
 
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2024-04-10' });
 const app = new Hono()
+
+
 
 app.get('/', (c) => {
   return c.text('Hello World!')
