@@ -1,20 +1,21 @@
-import { createAdaptorServer, serve } from '@hono/node-server'
+import { serve } from '@hono/node-server'
 import { Hono } from 'hono'
-import "dotenv/config";
+import { cors } from 'hono/cors'
+import { logger } from 'hono/logger'
+import 'dotenv/config'
+
+
 import Stripe from 'stripe';
-import { error } from 'console';
 import { HTTPException } from 'hono/http-exception';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2024-04-10' });
-
-
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 const app = new Hono()
 
 app.post('/checkout', async (c) => {
 
     try{
       const session = await stripe.checkout.sessions.create({
-        payment_method_types: ['card','amazon_pay','cashapp'],
+        payment_method_types: ['card',],
         line_items:[
           {
             price: 'price_1PN2guFRcXq5egITHtAIiRnm',
@@ -71,6 +72,48 @@ app.get('/', (c) => {
 `;
   return c.html(html)
 })
+
+app.post('/webhook', async (c) => {
+  const rawBody = await c.req.text();
+  const signature = c.req.header('stripe-signature');
+
+  let event;
+  try {
+    event = stripe.webhooks.constructEvent(rawBody, signature!, process.env.STRIPE_WEBHOOK_SECRET!);
+  } catch (error: any) {
+    console.error(`Webhook signature verification failed: ${error.message}`);
+    throw new HTTPException(400)
+  } 
+
+  // Handle the checkout.session.completed event
+  if (event.type === 'checkout.session.completed') {
+    const session = event.data.object;
+    console.log(session)
+
+    // TODO Fulfill the purchase
+    // Update Database with order details
+    // Add credits to customer account
+    // Send confirmation email
+    // Print shipping label
+    // Trigger order fulfillment workflow
+    // Update inventory
+    // Etc.
+  }
+
+  if (event.type === 'customer.subscription.updated') {
+    const subscription = event.data.object;
+    console.log(subscription)
+  }
+
+  if (event.type === 'customer.subscription.deleted') {
+    const subscription = event.data.object;
+    console.log(subscription)
+  }
+
+
+  return c.text('success');
+})
+
 
 
 const port = 3000
