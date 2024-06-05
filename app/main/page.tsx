@@ -2,9 +2,9 @@
 
 import toast, { Toaster } from 'react-hot-toast';
 
-const notify = () => toast('Here is your toast.');
+const notify = () => toast('Success Toast!');
 
-export default function About() {
+export default function Main() {
     return (
       <main>
       <div className="navbar bg-base-200">
@@ -12,7 +12,7 @@ export default function About() {
     <a className="btn btn-ghost text-xl">bradleydallen.io</a>
   </div>
   <div className="flex-1">
-    <a onClick={notify} className="btn btn-ghost text-xl">Toast Button</a>
+    <a onClick = {notify} className="btn btn-ghost text-xl">Click for Toast!</a>
   </div>
   <div className="flex-none gap-2">
     <div className="form-control">
