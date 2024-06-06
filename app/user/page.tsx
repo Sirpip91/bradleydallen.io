@@ -1,10 +1,11 @@
+import About from "../about/page";
 import LoginForm from "./LoginForm";
+import UserProfile from "./UserProfile";
 
 export default function User() {
     return (
       <div>
-        <h1>Login</h1>
-        <LoginForm/>
+        <UserProfile/>
       </div>
     );
   }

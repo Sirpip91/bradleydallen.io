@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-
+      <Navbar></Navbar>
       <main>{children}</main>
       <Toaster/> 
       </body>
@@ -27,3 +28,34 @@ export default function RootLayout({
     </html>
   );
 }
+
+const Navbar = () => {
+  return (
+    <div className="navbar bg-base-100">
+      <div className="flex-1">
+        <Link href="/" className="btn btn-ghost text-xl">
+          🔥 bradleydallen.io
+        </Link>
+      </div>
+      <div className="flex-none">
+        <ul className="menu menu-horizontal px-1">
+          <li>
+            <Link href="/" className="btn">
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link href="/photos" className="btn mx-3">
+              Photos
+            </Link>
+          </li>
+          <li>
+            <Link href="/user" className="btn">
+              User Auth
+            </Link>
+          </li>
+        </ul>
+      </div>
+    </div>
+  );
+};
