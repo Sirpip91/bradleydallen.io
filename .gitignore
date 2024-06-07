@@ -6,6 +6,9 @@
 .pnp.js
 .yarn/install-state.gz
 
+#velite files
+.velite
+
 # testing
 /coverage
 
