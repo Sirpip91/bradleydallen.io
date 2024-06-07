@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import {SiteHeader} from "@/components/site-header";
 
 import {cn} from "@/lib/utils";
 
@@ -24,7 +25,11 @@ export default function RootLayout({
           inter.variable
         )}
       >
-          {children}
+        <div className="relative flex min-h-dvh flex-col bg-background">
+          <SiteHeader/>
+          <main className="flex-1"> {children}</main>
+        </div>
+          
       </body>
     </html>
   );
