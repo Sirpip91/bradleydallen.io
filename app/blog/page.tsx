@@ -47,6 +47,7 @@ export default async function BlogPage({searchParams}:BlogPageProps){
                                     date = {date}
                                     title = {title}
                                     description= {description}
+                                    
                                 />
                             </li>
                         );
