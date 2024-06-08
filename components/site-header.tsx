@@ -25,7 +25,7 @@ export function SiteHeader(){
                             <span className="sr-only">GitHub</span>
                         </div>
                     </Link>
-                    <Link href={siteConfig.links.github} 
+                    <Link href={siteConfig.links.youtube} 
                     target ="_blank" 
                     rel="noreferrer"
                     >
@@ -33,8 +33,8 @@ export function SiteHeader(){
                          "w-10 px-0 hidden sm:inline-flex"
                          )}
                         >
-                            <Icons.LinkedIn className ="h-6 w-6" />
-                            <span className="sr-only">LinkedIn</span>
+                            <Icons.Youtube className ="h-6 w-6" />
+                            <span className="sr-only">Youtube</span>
                         </div>
                     </Link>
                     <ModeToggle></ModeToggle>

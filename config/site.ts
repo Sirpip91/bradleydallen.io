@@ -8,8 +8,9 @@ export const siteConfig ={
     author: "Bradley Allen",
     links: {
         twitter: "",
-        github: "",
+        github: "https://github.com/Sirpip91",
         personalSite: "",
+        youtube: "https://www.youtube.com/channel/UCYtU31c9jw4g7tFzDt1MGLw",
 
     },
 };

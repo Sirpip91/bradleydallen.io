@@ -20,9 +20,9 @@ export default function Home() {
           <div className="flex flex-col gap-4 justify-center sm:flex-row">
             <Link
               href="/blog"
-              className={cn(buttonVariants({ size: "lg" }), "w-full sm:w-fit")}
+              className={cn(buttonVariants({ variant: "outline", size: "lg" }), "w-full sm:w-fit")}
             >
-              View my blog
+              Blog
             </Link>
             <Link
               href={siteConfig.links.github}
