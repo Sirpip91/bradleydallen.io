@@ -21,7 +21,7 @@ export default async function AboutPage() {
       <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
         <div className="min-w-48 max-w-48 flex flex-col gap-2">
           <Avatar className="h-50 w-50"> 
-            <AvatarImage src="" alt={siteConfig.author} />
+            <AvatarImage src="https://github.com/shadcn.png" alt={siteConfig.author} />
             <AvatarFallback>BA</AvatarFallback>
           </Avatar>
           <h2 className="text-2xl font-bold text-center break-words">
