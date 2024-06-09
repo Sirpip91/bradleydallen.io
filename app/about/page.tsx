@@ -2,6 +2,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { siteConfig } from "@/config/site";
 import { Metadata } from "next";
 
+export const runtime = 'edge';
+
 export const metadata: Metadata = {
   title: "About Me",
   description: "Information about me",

@@ -7,6 +7,8 @@ import {cn} from "@/lib/utils";
 import { siteConfig } from "@/config/site";
 import { SiteFooter } from "@/components/site-footer";
 
+export const runtime = 'edge';
+
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
