@@ -1,5 +1,5 @@
 import { posts } from "#site/content";
-import { PostItem } from "@/components/post-item";
+import { PostItem } from "@/components/post-items";
 import { Tag } from "@/components/tag";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getAllTags, getPostsByTagSlug, sortTagsByCount } from "@/lib/utils";
