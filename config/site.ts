@@ -3,7 +3,7 @@ import { describe } from "node:test";
 
 export const siteConfig ={
     name: "bradleydallen.io",
-    url: "https://bradleydallen.io",
+    url: "https://www.bradleydallen.io/",
     description: "",
     author: "Bradley Allen",
     links: {
