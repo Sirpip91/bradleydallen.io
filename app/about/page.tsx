@@ -32,7 +32,7 @@ export default async function AboutPage() {
           </p>
         </div>
         <p className="text-muted-foreground text-lg py-4">
-        My name is Bradley Allen. I'm a self-taught programmer who happened to attend an American university for a computer science degree. I enjoy programming and bringing value to others via computer science topics. I despise overcomplicating topics to make things seem "smart"; this is a game I will not partake in. Feel free to contact me about projects or work that I can contribute to! Keep learning!
+        My name is Bradley Allen. Im a self-taught programmer who happened to attend an American university for a computer science degree. I enjoy programming and bringing value to others via computer science topics. I despise overcomplicating topics to make things seem "smart", this is a game I will not partake in. Feel free to contact me about projects or work that I can contribute to! Keep learning!
         </p>
       </div>
     </div>
