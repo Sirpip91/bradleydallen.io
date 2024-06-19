@@ -21,8 +21,8 @@ export default async function AboutPage() {
       <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
         <div className="min-w-48 max-w-48 flex flex-col gap-2">
           <Avatar className="h-48 w-48">
-            <AvatarImage src="/avatar.png" alt={siteConfig.author} />
-            <AvatarFallback>JC</AvatarFallback>
+            <AvatarImage src="https://media.licdn.com/dms/image/D5603AQGapeVgujFr-A/profile-displayphoto-shrink_200_200/0/1696027549594?e=1724284800&v=beta&t=PD2kBwymqwHxnUo6YlgzqyQ6nFoENP1omGnergNBO70" alt={siteConfig.author} />
+            <AvatarFallback>BA</AvatarFallback>
           </Avatar>
           <h2 className="text-2xl font-bold text-center break-words">
             {siteConfig.author}
@@ -32,13 +32,7 @@ export default async function AboutPage() {
           </p>
         </div>
         <p className="text-muted-foreground text-lg py-4">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum
+        My name is Bradley Allen. I'm a self-taught programmer who happened to attend an American university for a computer science degree. I enjoy programming and bringing value to others via computer science topics. I despise overcomplicating topics to make things seem "smart"; this is a game I will not partake in. Feel free to contact me about projects or work that I can contribute to! Keep learning!
         </p>
       </div>
     </div>
