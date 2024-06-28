@@ -4,6 +4,7 @@ import { cn, sortPosts } from "@/lib/utils";
 import { posts } from "#site/content";
 import Link from "next/link";
 import { PostItem } from "@/components/post-items";
+import { SignUp } from "@clerk/nextjs";
 
 export default function Home() {
   const latestPosts = sortPosts(posts).slice(0, 5);
@@ -22,19 +23,20 @@ export default function Home() {
               href="/blog"
               className={cn(buttonVariants({ size: "lg" }), "w-full sm:w-fit")}
             >
-              View my blog
+              View Blog
             </Link>
             <Link
-              href={siteConfig.links.github}
-              target="_blank"
-              rel="noreferrer"
+              href="/signup"
               className={cn(
                 buttonVariants({ variant: "outline", size: "lg" }),
                 "w-full sm:w-fit"
               )}
             >
-              GitHub
+              Signup
             </Link>
+
+           
+            
           </div>
         </div>
       </section>

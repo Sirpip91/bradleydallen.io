@@ -7,12 +7,15 @@ import {MainNav} from "./main-nav";
 import {ModeToggle} from "./mode-toggle"
 
 import{MobileNav} from "./mobile-nav";
+import { UserButton } from "@clerk/nextjs";
 export function SiteHeader(){
  return <header className="z-10 sticky top-0 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-14 max-w-screen-2xl items-center">
             <MainNav/>
             <div className="flex flex-1 items-center justify-end space-x-2">
                 <nav className="flex items-center">
+                <UserButton />
+                    {/*
                     <Link href={siteConfig.links.github} 
                     target ="_blank" 
                     rel="noreferrer"
@@ -37,7 +40,10 @@ export function SiteHeader(){
                             <span className="sr-only">Youtube</span>
                         </div>
                     </Link>
+                    /*/}
                     <ModeToggle></ModeToggle>
+
+                
                     <MobileNav/>
                 </nav>
                 

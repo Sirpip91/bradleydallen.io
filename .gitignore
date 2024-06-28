@@ -40,3 +40,4 @@ next-env.d.ts
 
 #environment vars
 .env.local
+.env
