@@ -7,6 +7,7 @@ import { Providers } from "@/components/providers";
 import { siteConfig } from "@/config/site";
 import { SiteFooter } from "@/components/site-footer";
 import {ClerkProvider,SignInButton,SignedIn,SignedOut,UserButton} from '@clerk/nextjs'
+import { dark } from '@clerk/themes';
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 

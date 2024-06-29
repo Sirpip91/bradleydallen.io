@@ -65,8 +65,10 @@
     --input: 210 1% 30%;
     --ring: 210 1% 30%;
   }
-}
+
  
+}
+  
 @layer base {
   * {
     @apply border-border;
@@ -74,4 +76,16 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.cl-headerTitle{
+    font-size: x-large;
+  }
+
+.cl-headerSubtitle{
+  font-size: medium;
+}
+
+.cl-socialButtonsBlockButtonText{
+  font-size: large;
 }
