@@ -4,10 +4,16 @@ import { cn, sortPosts } from "@/lib/utils";
 import { posts } from "#site/content";
 import Link from "next/link";
 import { PostItem } from "@/components/post-items";
-import { SignUp } from "@clerk/nextjs";
+import { SignUp  } from "@clerk/nextjs";
+
+import { auth } from '@clerk/nextjs/server';
 
 export default function Home() {
+
   const latestPosts = sortPosts(posts).slice(0, 5);
+  const {userId} = auth();
+  const username = userId as string;
+  console.log(userId);
   return (
     <>
       <section className="space-y-6 pb-8 pt-6 md:pb-12 md:mt-10 lg:py-32">
@@ -25,7 +31,8 @@ export default function Home() {
             >
               View Blog
             </Link>
-            <Link
+
+            {!userId &&(<Link
               href="/signup"
               className={cn(
                 buttonVariants({ variant: "outline", size: "lg" }),
@@ -33,10 +40,21 @@ export default function Home() {
               )}
             >
               Signup
-            </Link>
+            </Link>)}
 
-           
+            {userId &&(
+            <Link
+            href="/"
+            className={cn(
+              buttonVariants({ variant: "outline", size: "lg" }),
+              "w-full sm:w-fit text-lg font-medium"
+            )}
+          >
             
+            🎉 &nbsp; Welcome Back! &nbsp; 🎉
+          </Link>)
+            }
+
           </div>
         </div>
       </section>

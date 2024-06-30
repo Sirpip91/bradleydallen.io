@@ -81,11 +81,19 @@
 .cl-headerTitle{
     font-size: x-large;
   }
+.cl-socialButtonsBlockButtonText, .cl-formButtonPrimary, .cl-userButtonPopoverActionButton, .cl-internal-3gh7hq, .cl-formFieldLabel, .cl-signUp-start{
+  font-size: large;
+}
 
-.cl-headerSubtitle{
+.cl-footerAction, .cl-userPreviewSecondaryIdentifier, .cl-headerSubtitle{
   font-size: medium;
 }
 
-.cl-socialButtonsBlockButtonText{
-  font-size: large;
+.cl-internal-168uxhv, .cl-navbarButton, .cl-profileSectionTitleText,.cl-internal-bolkfx{
+  font-size: medium;
+}
+
+.cl-avatarBox{
+  width: 30px;
+  height: 30px;
 }
