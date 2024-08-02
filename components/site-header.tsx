@@ -12,7 +12,10 @@ export function SiteHeader(){
         <div className="container flex h-14 max-w-screen-2xl items-center">
             <MainNav/>
             <div className="flex flex-1 items-center justify-end space-x-2">
-                <nav className="flex items-center">
+                <nav className="flex items-center ">
+                <div className="pr-1 pt-1">
+                </div>
+                    {/*
                     <Link href={siteConfig.links.github} 
                     target ="_blank" 
                     rel="noreferrer"
@@ -37,7 +40,10 @@ export function SiteHeader(){
                             <span className="sr-only">Youtube</span>
                         </div>
                     </Link>
+                    /*/}
                     <ModeToggle></ModeToggle>
+
+                
                     <MobileNav/>
                 </nav>
                 

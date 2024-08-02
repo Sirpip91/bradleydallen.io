@@ -7,7 +7,10 @@ import { Providers } from "@/components/providers";
 import { siteConfig } from "@/config/site";
 import { SiteFooter } from "@/components/site-footer";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
+
+const inter = Inter({
+  subsets: ["latin"], 
+  variable: "--font-inter" });
 
 export const metadata: Metadata = {
   title: siteConfig.name,
