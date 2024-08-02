@@ -20,10 +20,10 @@ export default function Home() {
           </p>
           <div className="flex flex-col gap-4 justify-center sm:flex-row">
             <Link
-              href="/blog"
+              href="/content"
               className={cn(buttonVariants({ size: "lg" }), "w-full sm:w-fit text-lg font-medium")}
             >
-              View Blog
+              View Content
             </Link>
 
             <Link

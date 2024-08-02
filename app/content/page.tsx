@@ -7,19 +7,19 @@ import { getAllTags, sortPosts, sortTagsByCount } from "@/lib/utils";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "My blog",
-  description: "This is a description",
+  title: "bradleydallen.io",
+  description: "bradleydallen.io computer science tutorials",
 };
 
 const POSTS_PER_PAGE = 5;
 
-interface BlogPageProps {
+interface ContentPageProps {
   searchParams: {
     page?: string;
   };
 }
 
-export default async function BlogPage({ searchParams }: BlogPageProps) {
+export default async function ContentPage({ searchParams }: ContentPageProps) {
   const currentPage = Number(searchParams?.page) || 1;
   const sortedPosts = sortPosts(posts.filter((post) => post.published));
   const totalPages = Math.ceil(sortedPosts.length / POSTS_PER_PAGE);
@@ -36,7 +36,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
     <div className="container max-w-4xl py-6 lg:py-10">
       <div className="flex flex-col items-start gap-4 md:flex-row md:justify-between md:gap-8">
         <div className="flex-1 space-y-4">
-          <h1 className="inline-block font-black text-4xl lg:text-5xl">Blog</h1>
+          <h1 className="inline-block font-black text-4xl lg:text-5xl">Content</h1>
           <p className="text-xl text-muted-foreground">
             Maybe you can find something of value here.
           </p>
