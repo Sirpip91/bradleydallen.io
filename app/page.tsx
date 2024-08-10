@@ -1,11 +1,59 @@
+"use client"
 import { buttonVariants } from "@/components/ui/button";
 import { siteConfig } from "@/config/site";
 import { cn, sortPosts } from "@/lib/utils";
 import { posts } from "#site/content";
 import Link from "next/link";
 import { PostItem } from "@/components/post-items";
+import { supabase } from "@/lib/supabaseClient";
+import { useEffect, useState } from "react";
+import { User } from "@supabase/supabase-js";
 
 export default function Home() {
+
+  const [user, setUser] = useState<User | null>(null);
+  const [stripeCustomer, setStripeCustomer] = useState<any>(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      
+      setUser(user);
+
+      if (user) {
+        const { data: stripeCustomerData, error } = await supabase
+          .from("stripe_customers")
+          .select("*")
+          .eq("user_id", user.id)
+          .single();
+
+        if (error) {
+          console.log("No stripe customer data found",);
+        } else {
+          setStripeCustomer(stripeCustomerData);
+        }
+      }
+    };
+
+    fetchUser();
+
+    const { data: authListener } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        if (event === "SIGNED_IN") {
+          if (session) {
+            setUser(session.user);
+          }
+        } else if (event === "SIGNED_OUT") {
+          setUser(null);
+          setStripeCustomer(null);
+        }
+      }
+    );
+
+    return () => {
+      authListener.subscription.unsubscribe();
+    };
+  }, []);
 
   const latestPosts = sortPosts(posts).slice(0, 5);
   return (
@@ -25,17 +73,34 @@ export default function Home() {
             >
               View Content
             </Link>
-
-            <Link
-              href="/"
+            {user ? (
+  <>
+  <Link
+              href="/user"
               className={cn(
                 buttonVariants({ variant: "outline", size: "lg" }),
                 "w-full sm:w-fit text-lg font-medium"
               )}
             >
-              Button
+
+              Welcome Back!
             </Link>
 
+  </>
+) : ( <>
+            <Link
+              href="/signup"
+              className={cn(
+                buttonVariants({ variant: "outline", size: "lg" }),
+                "w-full sm:w-fit text-lg font-medium"
+              )}
+            >
+
+              Signup
+            </Link>
+
+            </>
+)}
           </div>
         </div>
       </section>
@@ -62,3 +127,5 @@ export default function Home() {
     </>
   );
 }
+
+
