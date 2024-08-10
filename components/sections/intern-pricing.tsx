@@ -191,7 +191,7 @@ export const PricingSection = () => {
 
               <CardFooter>
                 <Link href={link} passHref>
-                  <Button  onClick={title === "Pro" ? handleCheckout : undefined}
+                  <Button 
                     variant={
                       popular === PopularPlan?.YES ? "default" : "secondary"
                     }
@@ -208,3 +208,4 @@ export const PricingSection = () => {
     </section>
   );
 };
+//onClick={title === "Pro" ? handleCheckout : undefined}
