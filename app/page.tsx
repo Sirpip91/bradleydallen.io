@@ -10,11 +10,13 @@ import { useEffect, useState } from "react";
 import { User } from "@supabase/supabase-js";
 
 export default function Home() {
-
+/*
   const [user, setUser] = useState<User | null>(null);
   const [stripeCustomer, setStripeCustomer] = useState<any>(null);
 
   useEffect(() => {
+   
+   
     const fetchUser = async () => {
       const { data: { user } } = await supabase.auth.getUser();
       
@@ -54,7 +56,7 @@ export default function Home() {
       authListener.subscription.unsubscribe();
     };
   }, []);
-
+*/
   const latestPosts = sortPosts(posts).slice(0, 5);
   return (
     <>
@@ -73,21 +75,6 @@ export default function Home() {
             >
               View Content
             </Link>
-            {user ? (
-  <>
-  <Link
-              href="/user"
-              className={cn(
-                buttonVariants({ variant: "outline", size: "lg" }),
-                "w-full sm:w-fit text-lg font-medium"
-              )}
-            >
-
-              Welcome Back!
-            </Link>
-
-  </>
-) : ( <>
             <Link
               href="/signup"
               className={cn(
@@ -95,12 +82,8 @@ export default function Home() {
                 "w-full sm:w-fit text-lg font-medium"
               )}
             >
-
               Signup
             </Link>
-
-            </>
-)}
           </div>
         </div>
       </section>
@@ -126,6 +109,7 @@ export default function Home() {
       </section>
     </>
   );
+  
 }
 
 
