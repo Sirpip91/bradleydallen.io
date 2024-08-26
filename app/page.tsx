@@ -1,4 +1,3 @@
-"use client"
 import { buttonVariants } from "@/components/ui/button";
 import { siteConfig } from "@/config/site";
 import { cn, sortPosts } from "@/lib/utils";
@@ -13,12 +12,13 @@ export default function Home() {
 
   const [user, setUser] = useState<User | null>(null);
   const [stripeCustomer, setStripeCustomer] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchUser = async () => {
       const { data: { user } } = await supabase.auth.getUser();
-      
       setUser(user);
+      setLoading(false);
 
       if (user) {
         const { data: stripeCustomerData, error } = await supabase
@@ -27,9 +27,7 @@ export default function Home() {
           .eq("user_id", user.id)
           .single();
 
-        if (error) {
-          console.log("No stripe customer data found",);
-        } else {
+        if (!error) {
           setStripeCustomer(stripeCustomerData);
         }
       }
@@ -40,9 +38,7 @@ export default function Home() {
     const { data: authListener } = supabase.auth.onAuthStateChange(
       (event, session) => {
         if (event === "SIGNED_IN") {
-          if (session) {
-            setUser(session.user);
-          }
+          setUser(session?.user || null);
         } else if (event === "SIGNED_OUT") {
           setUser(null);
           setStripeCustomer(null);
@@ -56,6 +52,11 @@ export default function Home() {
   }, []);
 
   const latestPosts = sortPosts(posts).slice(0, 5);
+
+  if (loading) {
+    return <div>Loading...</div>;  // Placeholder content to prevent hydration errors
+  }
+
   return (
     <>
       <section className="space-y-6 pb-8 pt-6 md:pb-12 md:mt-10 lg:py-32">
@@ -74,33 +75,20 @@ export default function Home() {
               View Content
             </Link>
             {user ? (
-  <>
-  <Link
-              href="/user"
-              className={cn(
-                buttonVariants({ variant: "outline", size: "lg" }),
-                "w-full sm:w-fit text-lg font-medium"
-              )}
-            >
-
-              Welcome Back!
-            </Link>
-
-  </>
-) : ( <>
-            <Link
-              href="/signup"
-              className={cn(
-                buttonVariants({ variant: "outline", size: "lg" }),
-                "w-full sm:w-fit text-lg font-medium"
-              )}
-            >
-
-              Signup
-            </Link>
-
-            </>
-)}
+              <Link
+                href="/user"
+                className={cn(buttonVariants({ variant: "outline", size: "lg" }), "w-full sm:w-fit text-lg font-medium")}
+              >
+                Welcome Back!
+              </Link>
+            ) : (
+              <Link
+                href="/signup"
+                className={cn(buttonVariants({ variant: "outline", size: "lg" }), "w-full sm:w-fit text-lg font-medium")}
+              >
+                Signup
+              </Link>
+            )}
           </div>
         </div>
       </section>
@@ -127,5 +115,3 @@ export default function Home() {
     </>
   );
 }
-
-
