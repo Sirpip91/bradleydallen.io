@@ -1,0 +1,317 @@
+---
+title: Mastering Recursion for Coding Interviews A Comprehensive Guide
+description: Walkthrough on how to understand and use recursion.
+date: 2024-08-27
+tags: ["Data Structures & Algorithms"]
+published: true
+---
+
+# Introduction
+Recursion is a powerful technique in computer science, where a function calls itself to solve smaller instances of a problem. While it may seem complex at first, mastering recursion is crucial for tackling many coding interview problems. In this guide, we will explore the key concepts, common patterns, and problem-solving strategies related to recursion that will help you excel in your interviews.
+
+# What is Recursion?
+Recursion occurs when a function calls itself directly or indirectly to solve a smaller version of the original problem. The key to recursion is identifying a base case, which stops the recursion, and a recursive case, which breaks the problem down into smaller subproblems.
+
+Simple recursion example:
+Take the example code to print numbers 1 to 3:
+
+```cpp
+void print_numbers(int n) {
+    //base case
+    if (n > 0) {
+        print_numbers(n - 1); //resursive call.
+        std::cout << n << " "; //print on decsending
+    }
+}
+//calling the function with 3
+print_numbers(3);
+```
+# Key Concepts in Recursion
+1. Base Case: The condition under which the recursion stops. Without a base case, the recursion would run indefinitely.
+2. Recursive Case: The part of the function that breaks the problem down into smaller instances and calls itself.
+3. Stack Overflow: A common issue in recursion where too many recursive calls lead to exceeding the stack's limit.
+
+## Phases of Recursion
+
+There are two phases of recursion the Ascending phase and the Descending phase.
+
+### Ascending phase
+
+```less (4)
+print_numbers(3)
+   |
+   |-- print_numbers(2)
+   |   |
+   |   |-- print_numbers(1)
+   |       |
+   |       |-- print_numbers(0)  -> base case (does nothing, starts return)
+```
+### Descending phase
+
+```less
+returning from print_numbers(0)
+   |
+   |-- print_numbers(1) -> std::cout << 1 << " ";
+   |
+   |-- print_numbers(2) -> std::cout << 2 << " ";
+   |
+   |-- print_numbers(3) -> std::cout << 3 << " ";
+
+```
+
+This will have the output of : 1 2 3.
+
+
+
+## Recursion Variables
+
+Static Variables inside of recursive function will not be created on each recursive call.
+They will act as normal variables and can be changed/updated normally.
+Think of Static variables as gloabl varaiables as they act the same.
+Every recurisve call will use the same variable.
+
+# Forms of Recursion
+
+## Tail Recursion
+If the recursive call is the last in the function it is tail recursion. All actions 
+done are at Ascending time. There are no decsending actions with the recursion.
+
+Here is an example of Tail Recursion printing values:
+
+```cpp {5}
+void print_numbers(int n) {
+    //base case
+    if (n > 0) {
+        std::cout << n << " "; //print before recursive call
+        print_numbers(n - 1); // tail recursive call.
+    }
+}
+```
+
+Now if you have ANY returning /decsending actions it will no longer be tail recursive
+In most cases if you are writing a tail recursive function you might as well just make a loop.
+
+## Head Recursion
+If the recursion call is at the start of a function then it will be a head recursive call.
+All the action will be at the Descending call. There will be no calling time actions.
+
+Here is an example of a head recursion:
+
+```cpp {4}
+void print_numbers(int n) {
+    //base case
+    if (n > 0) {
+        print_numbers(n - 1); //head resursive call.
+        std::cout << n << " "; //print on decsending
+    }
+}
+```
+
+## Linear Recursion
+
+If there are actions before and after the recursive call then it will simply be a 
+linear recursion aka a mix between tail and head.
+
+## Tree Recursion
+Tree Recursion is where the recursive function will have multiple recursive calls.
+Many times this will be usefull for:
+```mdx ()
+Binary Tree:
+      1
+     / \
+    2   3
+   / \
+  4   5
+```
+
+In-Order Traversal: 4, 2, 5, 1, 3
+```cpp () showLineNumbers
+    void inOrder(TreeNode* root, vector<int>&v)
+    {
+        //base case if no root return.
+        if(!root)
+            return;
+        //left
+        inOrder(root->left,v);
+        //root
+        v.push_back(root->val);
+        //right
+        inOrder(root->right, v);
+    }
+```
+
+
+Pre-Order Traversal: 1, 2, 4, 5, 3
+```cpp () showLineNumbers
+    void preOrder(TreeNode* root, vector<int>&v)
+    {
+        //base case if no root return.
+        if(!root)
+            return;
+        //root
+        v.push_back(root->val);
+        //left
+        preOrder(root->left,v);
+        //right
+        preOrder(root->right, v);
+    }
+```
+
+Post-Order Traversal: 4, 5, 2, 3, 1
+```cpp () showLineNumbers
+    void postOrder(TreeNode* root, vector<int>&v)
+    {
+        //base case if no root return.
+        if(!root)
+            return;
+        //left
+        postOrder(root->left,v);
+        //right
+        postOrder(root->right, v);
+        //root
+        v.push_back(root->val);
+    }
+```
+
+## Indirect Recursion
+Indirect Recursion is where the recursive function calls ANOTHER recursive function.
+This is very specific recursion that is not used much. If you would like to understand
+and learn more please do your own research.
+
+Nuntheless here is ana example:
+```cpp {4}{10}
+void functionA(int n) {
+    if (n > 0) {
+        std::cout << "In functionA: " << n << std::endl;
+        functionB(n - 1);  // Call functionB
+    }
+}
+void functionB(int n) {
+    if (n > 0) {
+        std::cout << "In functionB: " << n << std::endl;
+        functionA(n / 2);  // Call functionA
+    }
+}
+int main() {
+    functionA(10);  // Start the recursion with functionA
+    return 0;
+}
+
+```
+## Nested Recursion
+This is where the recursive call has another recursive function inside of it.
+
+
+# Must Know Recursive problems
+
+## Factorial of a Number:
+
+The factorial of a number is the numbers leading up to n times it'self.
+For example  n = 4 
+
+4! = 1 * 2 * 3 * 4 * = 24
+
+```cpp (4) showLineNumbers
+int factorial(int n )
+{
+    if(n==0) // base case
+        return(1);
+    else
+        return factorial(n-1) * n; //recursive call
+}
+```
+
+## Finding the Power of a Number:
+
+```cpp (4) showLineNumbers
+int power(int m, int n )
+{
+    if(n == 0) //base case
+        return(1);
+    else
+        return power(m, n-1) * m; //recursive call
+}
+```
+Improving this function further by checking if even(this may be a follow up):
+```cpp (4) showLineNumbers
+int power(int m, int n )
+{
+    if(n == 0) //base case
+        return(1);
+    if(n % 2 == 0)  //additional check for evens
+        return power(m*m,n/2); //recursive call for evens
+    else
+        return m * power(m*m,(n-1)/2); //recursive call for odds
+}
+```
+
+## Fibonacci Series
+Every number is created by adding the previous 2 numbers.
+Most problems will ask this in recursive and itterative.
+```cpp (4) showLineNumbers
+//O(2^n)
+int fibonacci(int n )
+{
+    if(n<=1) //base case
+        return n;
+    return fib(n-2) + fib(n-1); //recursive call
+}
+```
+
+## Tower Of Hanoi
+
+[Tower of Hanoi](img/ptsd.png)
+is a classic mathematical puzzle that involves moving a set of disks from one peg to another, 
+following specific rules.
+
+```cpp (4) showLineNumbers
+void tower(int n,int A,int B,int C)
+{
+ if(n>0)
+ {
+ tower(n-1,A,C,B);
+ printf("(%d,%d)\n",A,C);
+ tower(n-1,B,A,C);
+ }
+}
+```
+
+## Determine Number of islands
+This Technique can be used for many other problems that require checking each side of 
+a matrix.
+``` cpp () showLineNumbers
+    int numIslands(vector<vector<char>>& grid) {
+        int count = 0;
+        //traverse the entire grid;
+        for(int i =0;i<grid.size();i++)
+        {
+            for(int j = 0; j<grid[i].size(); j++)
+            {
+                //if we find and island find entire thing.
+                if(grid[i][j] == '1')
+                {
+                    number(grid,i,j);
+                    count++;
+                }
+            }
+        }
+    }
+    void number(vector<vector<char>>& grid, int i, int j)
+    {
+        //out of bounds then return.
+        if(i<0 || j < 0 || i >=grid.size() || j >=grid[0].size())
+        return;
+        //if we find water '0' then return.
+        if(grid[i][j] == '0')
+        return;
+        //set curr to water so we dont cycle
+        grid[i][j] = '0';     
+        //Recursive Call to each neighbor top left bottom right 
+        number(grid,i+1,j);
+        number(grid,i-1,j);
+        number(grid,i,j+1);
+        number(grid,i,j-1);
+    }
+```
+
+This guide provides a solid foundation for understanding recursion.

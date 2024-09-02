@@ -97,3 +97,12 @@
   width: 30px;
   height: 30px;
 }
+.text-pink-400 {
+  color: #ec4899; /* Tailwind's pink-400 color */
+}
+.text-pink-400 {
+  color: #ec4899; /* Tailwind's pink-400 color */
+}
+.text-blue-600 {
+  color: #2563eb; /* Tailwind's blue-600 color */
+}
