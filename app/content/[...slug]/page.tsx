@@ -6,6 +6,7 @@ import "@/styles/mdx.css";
 import { Metadata } from "next";
 import { siteConfig } from "@/config/site";
 import { Tag } from "@/components/tag";
+import { formatDate } from "@/lib/utils";
 interface PostPageProps {
   params: {
     slug: string[];
@@ -73,15 +74,20 @@ export default async function PostPage({ params }: PostPageProps) {
 
   return (
     <article className="container py-6 prose dark:prose-invert max-w-3xl mx-auto">
-      <h1 className="mb-2">{post.title}</h1>
+    <h1 className="mt-2 inline-block font-heading text-4xl leading-tight lg:text-5xl" style={{ marginBottom: 0, paddingBottom: 15 }}>
+      {post.title}
+        </h1>
       <div className="flex gap-2 mb-2">
-        {post.tags?.map((tag) => (
+        Tags: {post.tags?.map((tag) => (
           <Tag tag={tag} key={tag} />
         ))}
       </div>
-      {post.description ? (
-        <p className="text-xl mt-0 text-muted-foreground">{post.description}</p>
-      ) : null}
+      <time
+            dateTime={post.date}
+            className="block text-sm text-muted-foreground"
+          >
+            Published on {formatDate(post.date)}
+          </time>
       <hr className="my-4" />
       <MDXContent code={post.body} />
     </article>
