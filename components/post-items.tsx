@@ -3,6 +3,7 @@ import Link from "next/link";
 import { buttonVariants } from "./ui/button";
 import { cn, formatDate } from "@/lib/utils";
 import { Tag } from "./tag";
+import { Icons } from "./icons";
 
 interface PostItemProps {
   slug: string;
@@ -41,11 +42,15 @@ export function PostItem({
           </dd>
         </dl>
         <Link
-          href={"/" + slug}
-          className={cn(buttonVariants({ variant: "link" }), "py-0")}
-        >
-          Read more →
-        </Link>
+      href={"/" + slug}
+      className={cn(
+        buttonVariants({ variant: "link" }),
+        "py-0 flex items-center gap-2 group" // Add group class here
+      )}
+    >
+      Read more
+      <Icons.chevronRight className="mr-2 h-4 w-4 transition-transform duration-200 group-hover:translate-x-2" />
+    </Link>
       </div>
     </article>
   );

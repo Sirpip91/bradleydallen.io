@@ -6,7 +6,10 @@ import "@/styles/mdx.css";
 import { Metadata } from "next";
 import { siteConfig } from "@/config/site";
 import { Tag } from "@/components/tag";
-import { formatDate } from "@/lib/utils";
+import { cn, formatDate } from "@/lib/utils";
+import Link from "next/link";
+import { Icons } from "@/components/icons";
+import { buttonVariants } from "@/components/ui/button";
 interface PostPageProps {
   params: {
     slug: string[];
@@ -73,7 +76,19 @@ export default async function PostPage({ params }: PostPageProps) {
   }
 
   return (
-    <article className="container py-6 prose dark:prose-invert max-w-3xl mx-auto">
+    <article className="container py-6  relative prose dark:prose-invert max-w-3xl  lg:py-10">
+   <Link
+  href="/content"
+  className={cn(
+    buttonVariants({ variant: "link" }),
+    "absolute left-[-150px] top-14 hidden xl:inline-flex group no-underline"
+  )}
+>
+  <Icons.chevronLeft className="mr-2 h-4 w-4 transition-transform duration-200 group-hover:translate-x-[-5px]" />
+  All Content
+</Link>
+
+
     <h1 className="mt-2 inline-block font-heading text-4xl leading-tight lg:text-5xl" style={{ marginBottom: 0, paddingBottom: 15 }}>
       {post.title}
         </h1>
