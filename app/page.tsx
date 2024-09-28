@@ -15,7 +15,7 @@ export default function Home() {
             bradleydallen.io
           </h1>
           <p className="max-w-[42rem] mx-auto text-muted-foreground sm:text-xl text-balance">
-            Computer Science without the fluff
+            Master Computer Science Concepts, Simplified
           </p>
           <div className="flex flex-col gap-4 justify-center sm:flex-row">
             <Link
@@ -31,7 +31,7 @@ export default function Home() {
                 "w-full sm:w-fit text-lg font-medium"
               )}
             >
-              Signup
+              Join the Community
             </Link>
           </div>
         </div>

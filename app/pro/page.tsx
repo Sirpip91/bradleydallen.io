@@ -11,9 +11,6 @@ export default function Pro() {
   return (
     <>
       <HeroSection />
-      <BenefitsSection />
-      <FeaturesSection/>
-      <TestimonialSection />
       <PricingSection/>
       <FAQSection/>
     </>

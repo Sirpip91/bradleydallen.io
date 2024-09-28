@@ -13,12 +13,12 @@ import {
   
   const FAQList: FAQProps[] = [
     {
-      question: "Is this handbok free?",
-      answer: "Yes. The handbook is free, but videos are available for one time payment. ",
+      question: "Is this Content free?",
+      answer: "Yes. The documentation is free, but videos are available for one time payment. ",
       value: "item-1",
     },
     {
-      question: "Will this guarantee me an internship?",
+      question: "Will guarantee knowledge?",
       answer:
         "No. There are no guarantees, but your chances will be greatly increased as you will have everything you need. ",
       value: "item-2",
@@ -27,7 +27,7 @@ import {
       question:
         "Why do I need the videos?",
       answer:
-        "The videos will show you (controversial) ways and techniques to aquire interviews and offers.",
+        "The videos will show you (controversial) ways and techniques to aquire knowledge, interviews and offers.",
       value: "item-3",
     },
     {
@@ -38,14 +38,8 @@ import {
     {
       question:
         "Is this only for students?",
-      answer: "No. These techniques can be used for aquiring full-time offers as well as internships.",
+      answer: "No. These techniques can be used for anyone wanting to improve their CS knowledge and land offers.",
       value: "item-5",
-    },
-    {
-      question:
-        "Can I use this for Non-Technical Internships?",
-      answer: "Yes. You may even have a higher chance of securing, as this is tailored for Computer Science which has more competition.",
-      value: "item-6",
     },
   ];
   

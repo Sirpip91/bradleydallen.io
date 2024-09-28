@@ -18,16 +18,16 @@ export const HeroSection = () => {
 
           <div className="max-w-screen-md mx-auto text-center text-4xl md:text-6xl font-bold">
             <h1>
-              The 
-              <span className="text-transparent px-2 bg-gradient-to-r from-[#eab308] to-primary bg-clip-text">
-              Internship Mastery 
+            Elevate Your Knowledge with
+              <span className="text-transparent px-2 bg-gradient-to-r from-customRed to-primary bg-clip-text">
+              Pro Membership
               </span>
-              Handbook
+              
             </h1>
           </div>
 
           <p className="max-w-screen-sm mx-auto text-xl text-muted-foreground">
-            {`Secure Your Internship Quickly: This All-in-One Course Skips the Nonsense and Gives You Everything You Need to Succeed!`}
+            {`Gain Unrestricted Access to Essential Computer Science Content and Accelerate Your Learning!`}
           </p>
 
           <div className="space-y-4 md:space-y-0 md:space-x-4">

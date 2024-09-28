@@ -83,10 +83,11 @@ export function Callout({
       </>
 ) : (
   <div>
-  <p className="text-yellow-500">
-   To view the videos please purchase them!
+  <p className="text-customRed">
+    To view the videos please <a href="/pro" className="text-customRed underline">purchase Pro Membership!</a>
   </p>
-  </div>
+</div>
+
 )}
     </div>
   );
