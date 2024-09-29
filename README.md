@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# bradleydallen.io
 
-## Getting Started
 
-First, run the development server:
+# 🌐 Computer Science Tutorials & Videos
+Welcome to bradleydallen.io, your go-to destination for mastering computer science through free tutorials and exclusive video content. I’m Bradley, a passionate developer dedicated to simplifying computer science concepts for everyone.
 
+# 🌟 Features
+Free Tutorials: Explore in-depth guides on essential topics like algorithms, data structures, coding interviews, and more. All completely free!
+Pro Membership for Videos: Unlock exclusive video content by subscribing to the Pro Membership. Videos dive deep into complex concepts with visual walkthroughs.
+
+
+# 🏅 Why Subscribe to Pro Membership?
+By becoming a Pro Member, you gain access to:
+
+Exclusive Video Content: Deep-dive into advanced topics with clear and engaging video explanations.
+Visual Learning: Follow along with detailed examples and real-world coding scenarios.
+
+
+# 📖 Topics Covered
+Algorithms & Data Structures
+Coding Interview Preparation
+Dynamic Programming & Recursion
+LeetCode Problem Solving
+Programming Languages: C++, Python, JavaScript, and more
+And all tutorials are free!
+
+
+# 🚀 Get Started
+Clone this repository to explore the site:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Copy code
+git clone https://github.com/YourUsername/your-repo-name.git
+Install the necessary dependencies:
 ```
+```bash
+Copy code
+npm install
+Run the development server:
+```
+```bash
+Copy code
+npm run dev
+Visit the site at http://localhost:3000 to view the free tutorials.
+```
+# 💻 Pro Membership
+All the tutorials are free to read, but by subscribing to the Pro Membership, you unlock exclusive video content designed to accelerate your learning through visual demonstrations.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# 🛠 Technologies Used
+Next.js for server-side rendering and scalability
+React for building interactive UIs
+MDX for blending Markdown and JSX in tutorials
+Tailwind CSS for custom, responsive styling
+Stripe for managing Pro Membership subscriptions
+Supabase for authentication and data storage
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+# 🤝 Contributions
+Since this is a one-developer project, contributions are welcome and appreciated!
 
-## Learn More
+Fork the repository.
+Create a feature branch (git checkout -b feature/YourFeature).
+Commit your changes (git commit -m 'Add feature').
+Push your branch (git push origin feature/YourFeature).
+Open a Pull Request.
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# 📫 Contact
+Feel free to reach out with suggestions or feedback!
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Website: bradleydallen.io
