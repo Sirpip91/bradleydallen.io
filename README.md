@@ -17,12 +17,12 @@ Visual Learning: Follow along with detailed examples and real-world coding scena
 
 
 # 📖 Topics Covered
-Algorithms & Data Structures
-Coding Interview Preparation
-Dynamic Programming & Recursion
-LeetCode Problem Solving
-Programming Languages: C++, Python, JavaScript, and more
-And all tutorials are free!
+* Algorithms & Data Structures
+* Coding Interview Preparation
+* Dynamic Programming & Recursion
+* LeetCode Problem Solving
+* Programming Language: C++
+* And all tutorials are free!
 
 
 # 🚀 Get Started
@@ -55,11 +55,11 @@ Supabase for authentication and data storage
 # 🤝 Contributions
 Since this is a one-developer project, contributions are welcome and appreciated!
 
-Fork the repository.
-Create a feature branch (git checkout -b feature/YourFeature).
-Commit your changes (git commit -m 'Add feature').
-Push your branch (git push origin feature/YourFeature).
-Open a Pull Request.
+* Fork the repository.
+* Create a feature branch (git checkout -b feature/YourFeature).
+* Commit your changes (git commit -m 'Add feature').
+* Push your branch (git push origin feature/YourFeature).
+* Open a Pull Request.
 
 
 # 📫 Contact
