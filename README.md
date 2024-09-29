@@ -26,22 +26,20 @@ And all tutorials are free!
 
 
 # 🚀 Get Started
-Clone this repository to explore the site:
+1. Clone this repository to explore the site:
 ```bash
-Copy code
 git clone https://github.com/YourUsername/your-repo-name.git
-Install the necessary dependencies:
 ```
+2. Install the necessary dependencies:
 ```bash
-Copy code
 npm install
-Run the development server:
 ```
+3. Run the development server:
 ```bash
-Copy code
 npm run dev
-Visit the site at http://localhost:3000 to view the free tutorials.
 ```
+4. Visit the site at http://localhost:3000 to view the site locally.
+
 # 💻 Pro Membership
 All the tutorials are free to read, but by subscribing to the Pro Membership, you unlock exclusive video content designed to accelerate your learning through visual demonstrations.
 
