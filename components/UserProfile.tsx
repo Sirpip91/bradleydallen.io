@@ -82,7 +82,7 @@ export default function UserProfile() {
                   Stripe Customer Name: <strong>{stripeCustomer.customer_name}</strong>
                 </p>
                 <p>
-                  Purchased Videos: <strong className="text-yellow-500">{stripeCustomer.has_paid}</strong>
+                  Purchased Content: <strong className="text-yellow-500">{stripeCustomer.has_paid}</strong>
                 </p>
                
              <p>Thank you for being a customer!</p>

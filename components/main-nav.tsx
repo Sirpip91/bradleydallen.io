@@ -22,13 +22,11 @@ export function MainNav(){
             <div className="text-customRed">Pro</div>
             
         </Link>
-        <Link href="/user" className={cn(" center-right text-lg font-medium transition-colors hover:text-primary hidden sm:inline-block",pathname ==="/user" ? "text-foreground" : "text-foreground/60")}
-        >
-            Profile
-        </Link>
         <Link href="/about" className={cn("text-lg font-medium transition-colors hover:text-primary hidden sm:inline-block",pathname ==="/about" ? "text-foreground" : "text-foreground/60")}
         >
             About
         </Link>
+
+        
      </nav>;
 }
