@@ -17,7 +17,7 @@ const products = [
     icon: <FileText className="h-6 w-6" />,
     href: "/tags/internship-mastery",
     price: "Hide",
-    image: "/static/handbook.png", // Correct path
+    image: "/public/static/handbook.png", // Correct path
   },
   {
     id: 2,
@@ -27,7 +27,7 @@ const products = [
     icon: <Video className="h-6 w-6" />,
     href: "/tags/data-structures",
     price: "Free",
-    image: "/static/data-structure.png", // Correct path
+    image: "/public/static/data-structure.png", // Correct path
   },
   //add more catalogs by just increasing the ID
 ]
