@@ -23,24 +23,24 @@ export function MobileNav(){
             </SheetTrigger>
             <SheetContent side ="right">
                 <MobileLink href="/" className ="flex items-center ">
-                    <Icons.logo className ="mr-2 h-4 w-4" />
+
                     <span className="font-bold">{siteConfig.name}</span>
                 </MobileLink>
                 <div className="flex flex-col gap-3 mt-3">
                     <MobileLink onOpenChange={setOpen} href="/content">
                         Content
                     </MobileLink>
-                    <MobileLink onOpenChange={setOpen} href="/handbook">
-                        Internship Handbook
+                    <MobileLink onOpenChange={setOpen} href="/pro">
+                        Pro
                     </MobileLink>
                     <MobileLink onOpenChange={setOpen} href="/about">
                         About
                     </MobileLink>
-                    <Link target = "_blank" rel="noreferrer" href={siteConfig.links.github}>
-                        Github
+                    <Link target = "_blank" rel="noreferrer" href={siteConfig.links.youtube}>
+                        Youtube
                     </Link>
                     <Link target = "_blank" rel="noreferrer" href={siteConfig.links.github}>
-                        LinkedIn
+                        Github
                     </Link>
                     
                 </div>

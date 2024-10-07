@@ -7,6 +7,7 @@ import {
   CardContent,
   CardDescription,
   CardHeader,
+  CardFooter,
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -46,51 +47,55 @@ export default function SignUpForm() {
   
 
   return (
-    <Card className="mx-auto max-w-sm">
-      <CardHeader>
-        <CardTitle className="text-2xl">Sign Up</CardTitle>
-        <CardDescription>
-          Enter your email below to create a new account
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <form onSubmit={handleSignUp} className="grid gap-4">
-          <div className="grid gap-2">
-            <Label htmlFor="email">Email</Label>
-            <Input
-              id="email"
-              type="email"
-              placeholder="m@example.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-          <div className="grid gap-2">
-            <div className="flex items-center">
-              <Label htmlFor="password">Password</Label>
-             
-            </div>
-            <Input
-              id="password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-          <Button type="submit" className="w-full" disabled={loading}>
-            {loading ? "Loading..." : "Sign Up"}
-          </Button>
-          <div className="mt-4 text-center text-sm">
-          Already have an account?{" "}
-          <Link href="/login" className="underline">
-            Log in
-          </Link>
+    <Card className="w-[400px]">
+  <CardHeader>
+    <CardTitle className="text-3xl font-bold">Sign Up</CardTitle>
+    <CardDescription className="text-lg">Create your account to get started.</CardDescription>
+  </CardHeader>
+  <CardContent>
+    <form onSubmit={handleSignUp} className="grid gap-4">
+      <div className="grid w-full items-center gap-6">
+        <div className="flex flex-col space-y-2">
+          <Label htmlFor="email" className="text-lg font-medium">
+            Email
+          </Label>
+          <Input
+            id="email"
+            type="email"
+            placeholder="m@example.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
         </div>
-        </form>
-      </CardContent>
-      <Toaster/>
-    </Card>
+        <div className="flex flex-col space-y-2">
+          <Label htmlFor="password" className="text-lg font-medium">
+            Password
+          </Label>
+          <Input
+            id="password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
+        <Button type="submit" className="w-full text-lg py-6" disabled={loading}>
+          {loading ? "Loading..." : "Sign Up"}
+        </Button>
+      </div>
+    </form>
+  </CardContent>
+  <CardFooter className="flex flex-col items-center space-y-4">
+    <div className="text-base text-muted-foreground">
+      Already have an account?{" "}
+      <Link href="/login" className="text-primary hover:underline">
+        Log in
+      </Link>
+    </div>
+  </CardFooter>
+  <Toaster/>
+</Card>
+
   );
 }
