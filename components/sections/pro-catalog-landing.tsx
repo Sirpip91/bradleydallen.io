@@ -1,4 +1,6 @@
 import Image from "next/image"
+import Handbook from "@/public/static/handbook.png"
+import DSA from "@/public/static/data-structure.png"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
@@ -16,7 +18,7 @@ const products = [
     icon: <FileText className="h-6 w-6" />,
     href: "/tags/internship-mastery",
     price: "Hide",
-    image: "/static/handbook.jpg", // Correct path
+    image: Handbook, // Correct path
   },
   {
     id: 2,
@@ -26,7 +28,7 @@ const products = [
     icon: <Video className="h-6 w-6" />,
     href: "/tags/data-structures",
     price: "Free",
-    image: "/static/data-structure.jpg", // Correct path
+    image: DSA, // Correct path
   },
   //add more catalogs by just increasing the ID
 ]
