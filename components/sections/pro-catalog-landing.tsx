@@ -1,9 +1,8 @@
 import Image from "next/image"
-
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Book, Video, FileText, ArrowRight } from "lucide-react"
+import { Video, FileText, ArrowRight } from "lucide-react"
 //types: templates,ebook,course,
 //Icons: FileText, Book, Video
 //Price: "Free" "Hide"
@@ -17,7 +16,7 @@ const products = [
     icon: <Video className="h-6 w-6" />,
     href: "/tags/data-structures",
     price: "Free",
-    image: "/static/data-structure.JPG", // Correct path
+    image: "static/data-structure.JPG", // Remove leading slash
   },
   {
     id: 2,
@@ -27,7 +26,7 @@ const products = [
     icon: <FileText className="h-6 w-6" />,
     href: "/tags/internship-mastery",
     price: "Hide",
-    image: "/static/handbook.JPG", // Correct path
+    image: "static/handbook.JPG", // Remove leading slash
   },
   //add more catalogs by just increasing the ID
 ]
@@ -36,9 +35,11 @@ export default function ProCatalogLanding() {
   return (
     <div className="min-h-screen bg-background">
       <header className="pt-20 pb-16 text-center">
-        <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl "> <span className="text-customRed">Pro </span>Catalog</h1>
+        <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
+          <span className="text-customRed">Pro </span>Catalog
+        </h1>
         <p className="mt-4 text-xl text-muted-foreground max-w-2xl mx-auto">
-          Elevate your skills with our premium courses and resources for modern computer science. Learn information that&apos;s usefull.
+          Elevate your skills with our premium courses and resources for modern computer science. Learn information that&apos;s useful.
         </p>
       </header>
       <main className="container mx-auto px-4 pb-20">
@@ -47,10 +48,10 @@ export default function ProCatalogLanding() {
             <Card key={product.id} className="flex flex-col overflow-hidden">
               <div className="relative h-48 w-full">
                 <Image
-                  src={product.image}
+                  src={`/${product.image}`}
                   alt={product.title}
-                  layout="fill"
-                  objectFit="cover"
+                  fill
+                  style={{ objectFit: "cover" }}
                   className="transition-transform duration-300 ease-in-out hover:scale-105"
                 />
               </div>
@@ -61,11 +62,10 @@ export default function ProCatalogLanding() {
                   </div>
                   <span className="text-2xl font-bold text-primary">
                     {product.price === "Free" ? "Free" : 
-                        product.price === "TBA" ? "Coming Soon!" : 
-                        product.price === "Hide" ? null : 
-                        `$${product.price}`}
-                    </span>
-
+                     product.price === "TBA" ? "Coming Soon!" : 
+                     product.price === "Hide" ? null : 
+                     `$${product.price}`}
+                  </span>
                 </div>
                 <CardTitle className="line-clamp-1">{product.title}</CardTitle>
               </CardHeader>
@@ -75,8 +75,8 @@ export default function ProCatalogLanding() {
               <CardFooter>
                 <Link href={product.href} passHref className="w-full">
                   <Button className="w-full">
-                  {product.type === "course" ? "Start Learning" : product.type === "TBA" ? "Coming Soon!" : "View Details"}
-                  <ArrowRight className="ml-2 h-4 w-4" />
+                    {product.type === "course" ? "Start Learning" : product.type === "TBA" ? "Coming Soon!" : "View Details"}
+                    <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
               </CardFooter>

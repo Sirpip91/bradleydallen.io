@@ -2,7 +2,13 @@ import { build } from 'velite'
 
 /** @type {import('next').NextConfig} */
 export default {
-  // othor next config here...
+  // other next config here...
+  reactStrictMode: true,
+  images: {
+    domains: ['localhost'],
+    unoptimized: true,
+  },
+  
   webpack: config => {
     config.plugins.push(new VeliteWebpackPlugin())
     return config
