@@ -11,23 +11,23 @@ import { Book, Video, FileText, ArrowRight } from "lucide-react"
 const products = [
   {
     id: 1,
-    title: "Internship Mastery Handbook",
-    description: "Unlock your potential with this comprehensive internship guide!",
-    type: "TBA",
-    icon: <FileText className="h-6 w-6" />,
-    href: "/tags/internship-mastery",
-    price: "Hide",
-    image: "/static/handbook.png", // Correct path
-  },
-  {
-    id: 2,
     title: "Data Structures In C++",
     description: "Understand complex data structures and learn C++ STL.",
     type: "course",
     icon: <Video className="h-6 w-6" />,
     href: "/tags/data-structures",
     price: "Free",
-    image: "/static/data-structure.png", // Correct path
+    image: "/static/data-structure.JPG", // Correct path
+  },
+  {
+    id: 2,
+    title: "Internship Mastery Handbook",
+    description: "Unlock your potential with this comprehensive internship guide!",
+    type: "TBA",
+    icon: <FileText className="h-6 w-6" />,
+    href: "/tags/internship-mastery",
+    price: "Hide",
+    image: "/static/handbook.JPG", // Correct path
   },
   //add more catalogs by just increasing the ID
 ]
@@ -38,7 +38,7 @@ export default function ProCatalogLanding() {
       <header className="pt-20 pb-16 text-center">
         <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl "> <span className="text-customRed">Pro </span>Catalog</h1>
         <p className="mt-4 text-xl text-muted-foreground max-w-2xl mx-auto">
-          Elevate your skills with our premium courses and resources for modern web development.
+          Elevate your skills with our premium courses and resources for modern computer science. Learn information that's usefull.
         </p>
       </header>
       <main className="container mx-auto px-4 pb-20">
