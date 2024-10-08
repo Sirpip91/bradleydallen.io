@@ -5,7 +5,7 @@ export default {
   // other next config here...
   reactStrictMode: true,
   images: {
-    domains: ['localhost'],
+    domains: ['bradleydallen.io'],
     unoptimized: true,
   },
   
