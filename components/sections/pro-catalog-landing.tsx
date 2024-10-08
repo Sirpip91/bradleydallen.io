@@ -1,4 +1,3 @@
-import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
@@ -16,7 +15,7 @@ const products = [
     icon: <Video className="h-6 w-6" />,
     href: "/tags/data-structures",
     price: "Free",
-    image: "static/data-structure.JPG", // Remove leading slash
+    image: "/static/data-structure.JPG",
   },
   {
     id: 2,
@@ -26,11 +25,10 @@ const products = [
     icon: <FileText className="h-6 w-6" />,
     href: "/tags/internship-mastery",
     price: "Hide",
-    image: "static/handbook.JPG", // Remove leading slash
+    image: "/static/handbook.JPG",
   },
   //add more catalogs by just increasing the ID
 ]
-
 export default function ProCatalogLanding() {
   return (
     <div className="min-h-screen bg-background">
@@ -47,12 +45,10 @@ export default function ProCatalogLanding() {
           {products.map((product) => (
             <Card key={product.id} className="flex flex-col overflow-hidden">
               <div className="relative h-48 w-full">
-                <Image
-                  src={`/${product.image}`}
+                <img
+                  src={product.image}
                   alt={product.title}
-                  fill
-                  style={{ objectFit: "cover" }}
-                  className="transition-transform duration-300 ease-in-out hover:scale-105"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 ease-in-out hover:scale-105"
                 />
               </div>
               <CardHeader>
