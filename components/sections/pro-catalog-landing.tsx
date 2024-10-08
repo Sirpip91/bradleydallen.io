@@ -1,4 +1,7 @@
 import Link from "next/link"
+import Image from "next/image"
+import data from '../../content/content/img/data-structure.jpg'
+import handbook from '../../content/content/img/handbook.jpg'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Video, FileText, ArrowRight } from "lucide-react"
@@ -15,8 +18,9 @@ const products = [
     icon: <Video className="h-6 w-6" />,
     href: "/tags/data-structures",
     price: "Free",
-    image: "/static/data-structure.jpg",
+    image: data,
   },
+  
   {
     id: 2,
     title: "Internship Mastery Handbook",
@@ -25,19 +29,18 @@ const products = [
     icon: <FileText className="h-6 w-6" />,
     href: "/tags/internship-mastery",
     price: "Hide",
-    image: "/static/handbook.jpg",
+    image: handbook,
   },
   //add more catalogs by just increasing the ID
 ]
+
 export default function ProCatalogLanding() {
   return (
     <div className="min-h-screen bg-background">
       <header className="pt-20 pb-16 text-center">
-        <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
-          <span className="text-customRed">Pro </span>Catalog
-        </h1>
+        <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl "> <span className="text-customRed">Pro </span>Catalog</h1>
         <p className="mt-4 text-xl text-muted-foreground max-w-2xl mx-auto">
-          Elevate your skills with our premium courses and resources for modern computer science. Learn information that&apos;s useful.
+          Elevate your skills with our premium courses and resources for modern computer science. Learn information that&apos;s usefull.
         </p>
       </header>
       <main className="container mx-auto px-4 pb-20">
@@ -45,10 +48,12 @@ export default function ProCatalogLanding() {
           {products.map((product) => (
             <Card key={product.id} className="flex flex-col overflow-hidden">
               <div className="relative h-48 w-full">
-                <img
+                <Image
                   src={product.image}
                   alt={product.title}
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 ease-in-out hover:scale-105"
+                  layout="fill"
+                  objectFit="cover"
+                  className="transition-transform duration-300 ease-in-out hover:scale-105"
                 />
               </div>
               <CardHeader>
@@ -58,10 +63,11 @@ export default function ProCatalogLanding() {
                   </div>
                   <span className="text-2xl font-bold text-primary">
                     {product.price === "Free" ? "Free" : 
-                     product.price === "TBA" ? "Coming Soon!" : 
-                     product.price === "Hide" ? null : 
-                     `$${product.price}`}
-                  </span>
+                        product.price === "TBA" ? "Coming Soon!" : 
+                        product.price === "Hide" ? null : 
+                        `$${product.price}`}
+                    </span>
+
                 </div>
                 <CardTitle className="line-clamp-1">{product.title}</CardTitle>
               </CardHeader>
@@ -71,8 +77,8 @@ export default function ProCatalogLanding() {
               <CardFooter>
                 <Link href={product.href} passHref className="w-full">
                   <Button className="w-full">
-                    {product.type === "course" ? "Start Learning" : product.type === "TBA" ? "Coming Soon!" : "View Details"}
-                    <ArrowRight className="ml-2 h-4 w-4" />
+                  {product.type === "course" ? "Start Learning" : product.type === "TBA" ? "Coming Soon!" : "View Details"}
+                  <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
               </CardFooter>
