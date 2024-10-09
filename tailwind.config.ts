@@ -60,6 +60,8 @@ const config = {
           foreground: "hsl(var(--card-foreground))",
         },
         customRed: '#ff5722', // Add your custom color here pro memebrshiop
+        customBad: '#dc2626',
+        customGreen: '#15803d',
       },
       borderRadius: {
         lg: "var(--radius)",

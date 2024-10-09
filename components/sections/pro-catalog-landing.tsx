@@ -1,10 +1,13 @@
 import Link from "next/link"
 import Image from "next/image"
 import data from '../../content/content/img/data-structure.jpg'
+import suit from '../../content/content/img/consultation.png'
 import handbook from '../../content/content/img/handbook.jpg'
-import { Button } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Video, FileText, ArrowRight } from "lucide-react"
+import { TestimonialSection } from "./intern-testomonials"
+import { cn } from "@/lib/utils"
 //types: templates,ebook,course,
 //Icons: FileText, Book, Video
 //Price: "Free" "Hide"
@@ -30,6 +33,17 @@ const products = [
     href: "/tags/internship-mastery",
     price: "Hide",
     image: handbook,
+  },
+
+  {
+    id: 3,
+    title: "1:1 Consultation",
+    description: "Book a consultation with me. I will go over any topic. I will ",
+    type: "ebook",
+    icon: <Video className="h-6 w-6" />,
+    href: "/tags/internship-mastery",
+    price: "50hr",
+    image: suit,
   },
   //add more catalogs by just increasing the ID
 ]
@@ -85,6 +99,25 @@ export default function ProCatalogLanding() {
             </Card>
           ))}
         </div>
+        <section className="bg-background ">
+          <TestimonialSection/>
+      </section>
+
+      <section className="bg-background py-12 lg:py-20">
+        <div className="container text-center">
+          <h2 className="text-3xl font-bold mb-4">Ready to Level-Up Your CS Knowledge?</h2>
+          <p className="text-xl mb-8">Join a community of students who've transformed their skills and careers with the cutting-edge information.</p>
+          <Link
+            href="/signup"
+            className={cn(
+              buttonVariants({ variant: "secondary", size: "lg" }),
+              "text-lg font-medium"
+            )}
+          >
+            Get Started Today
+          </Link>
+        </div>
+      </section>
       </main>
     </div>
   )
