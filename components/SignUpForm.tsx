@@ -87,13 +87,24 @@ export default function SignUpForm() {
     </form>
   </CardContent>
   <CardFooter className="flex flex-col items-center space-y-4">
-    <div className="text-base text-muted-foreground">
-      Already have an account?{" "}
-      <Link href="/login" className="text-primary hover:underline">
-        Log in
-      </Link>
-    </div>
-  </CardFooter>
+        <p className="text-sm text-muted-foreground text-center">
+          By signing up, you agree to bradleydallen.io{' '}
+          <Link href="/terms" className="text-primary hover:underline">
+            Terms of Service
+          </Link>
+          {' & '}
+          <Link href="/privacy" className="text-primary hover:underline">
+            Privacy Policy
+          </Link>
+          .
+        </p>
+        <div className="text-base text-muted-foreground">
+          Already have an account?{" "}
+          <Link href="/login" className="text-primary hover:underline">
+            Log in
+          </Link>
+        </div>
+      </CardFooter>
   <Toaster/>
 </Card>
 
