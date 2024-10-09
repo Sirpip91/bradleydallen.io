@@ -45,11 +45,16 @@ export default function LoginForm() {
   const handleGoogleLogin = async () => {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
+      options: {
+        redirectTo: 'https://www.bradleydallen.io/user',  // Change to your redirect URL
+      },
     });
 
     if (error) {
       console.error("Google login error:", error);
       toast.error("An error occurred during Google login.");
+    }else {
+      toast.success("Logged in with Google successfully! Redirecting...");
     }
   };
 

@@ -49,11 +49,16 @@ export default function SignUpForm() {
   const handleGoogleSignUp = async () => {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
+      options: {
+        redirectTo: 'https://www.bradleydallen.io/user',  // Change to your redirect URL
+      },
     });
 
     if (error) {
       console.error("Google sign up error:", error);
       toast.error("An error occurred during Google sign up.");
+    }else {
+      toast.success("Signed in with Google successfully! Redirecting...");
     }
   };
   
@@ -102,7 +107,7 @@ export default function SignUpForm() {
             <span className="w-full border-t border-gray-300" />
           </div>
           <div className="relative flex justify-center text-sm">
-            <span className="bg-white px-2 text-gray-500">Or</span>
+            <span className="bg-white dark:bg-background px-2 text-gray-500">Or</span>
           </div>
         </div>
         <Button onClick={handleGoogleSignUp} variant="outline" className="w-full text-lg py-6">
