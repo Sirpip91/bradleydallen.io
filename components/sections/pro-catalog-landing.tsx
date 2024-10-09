@@ -106,7 +106,7 @@ export default function ProCatalogLanding() {
       <section className="bg-background py-12 lg:py-20">
         <div className="container text-center">
           <h2 className="text-3xl font-bold mb-4">Ready to Level-Up Your CS Knowledge?</h2>
-          <p className="text-xl mb-8">Join a community of students who've transformed their skills and careers with the cutting-edge information.</p>
+          <p className="text-xl mb-8">Join a community of students who&apos;ve transformed their skills and careers with the cutting-edge information.</p>
           <Link
             href="/signup"
             className={cn(
