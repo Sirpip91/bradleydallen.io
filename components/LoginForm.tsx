@@ -15,6 +15,7 @@ import { Label } from "@/components/ui/label";
 import React, { useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import toast, { Toaster } from "react-hot-toast";
+import { FcGoogle } from 'react-icons/fc';
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
@@ -39,6 +40,17 @@ export default function LoginForm() {
     }
   
     setLoading(false);
+  };
+
+  const handleGoogleLogin = async () => {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+    });
+
+    if (error) {
+      console.error("Google login error:", error);
+      toast.error("An error occurred during Google login.");
+    }
   };
 
   return (
@@ -80,6 +92,17 @@ export default function LoginForm() {
             </Button>
           </div>
         </form>
+        <div className="relative mt-6 mb-6">
+          <div className="absolute inset-0 flex items-center">
+            <span className="w-full border-t border-gray-300" />
+          </div>
+          <div className="relative flex justify-center text-sm">
+            <span className="bg-white px-2 text-gray-500">Or</span>
+          </div>
+        </div>
+        <Button onClick={handleGoogleLogin} variant="outline" className="w-full text-lg py-6">
+          <FcGoogle className="mr-2 h-6 w-6" /> Log in with Google
+        </Button>
       </CardContent>
       <CardFooter className="flex flex-col items-center space-y-4">
         <div className="flex justify-between w-full text-base">
