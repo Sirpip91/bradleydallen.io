@@ -27,7 +27,7 @@ export default function Home() {
               </span> That Matters
           </h1>
           <p className="max-w-[42rem] mx-auto text-muted-foreground sm:text-xl text-balance">
-          Master Computer Science concepts that schools don&apos;t teach
+          Master Computer Science Concepts that Schools Don&apos;t Teach
           </p>
           <div className="flex flex-col gap-4 justify-center sm:flex-row">
             <Link
@@ -71,6 +71,22 @@ export default function Home() {
             <h3 className="text-2xl font-semibold mb-2">Supportive Community</h3>
             <p className="mx-auto sm:text-md text-balance">Join a network of like-minded people who are focused on actual growth instead of percieved growth.</p>
           </div>
+        </div>
+      </section>
+
+      <section className="bg-background  py-12 lg:py-20">
+        <div className="container text-center">
+          <h2 className="text-3xl font-bold mb-4">Ready to level up your Knowledge?</h2>
+          <p className="text-xl mb-8"></p>
+          <Link
+            href="/pro"
+            className={cn(
+              buttonVariants({ variant: "secondary", size: "lg" }),
+              "text-lg font-medium transition-transform duration-200 ease-in-out hover:scale-105"
+            )}
+          >
+            Get Started Today
+          </Link>
         </div>
       </section>
 

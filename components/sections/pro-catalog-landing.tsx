@@ -54,7 +54,7 @@ export default function ProCatalogLanding() {
       <header className="pt-20 pb-16 text-center">
         <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl "> <span className="text-customRed">Pro </span>Catalog</h1>
         <p className="mt-4 text-xl text-muted-foreground max-w-2xl mx-auto">
-          Elevate your skills with our premium courses and resources for modern computer science. Learn information that&apos;s usefull.
+          Elevate your skills with these premium courses and resources for modern computer science. Learn information that&apos;s usefull.
         </p>
       </header>
       <main className="container mx-auto px-4 pb-20">
