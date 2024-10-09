@@ -19,6 +19,9 @@ const config = {
       },
     },
     extend: {
+      screens: {
+        sm: "768px", // Modify the "sm" screen breakpoint to start at 768px
+      },
       fontFamily: {
         sans: ["var(--font-inter)", ...fontFamily.sans],
       },
