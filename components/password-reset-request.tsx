@@ -70,6 +70,11 @@ export function PasswordResetRequest() {
             <Button type="submit" className="w-full text-lg py-6" disabled={isLoading}>
               {isLoading ? "Sending..." : "Send Reset Link"}
             </Button>
+            <div className=" justify-between w-full text-base">
+            <p className="text-sm text-muted-foreground text-center">
+            If you have an account you will recieve an email. Be sure to check spam/junk.
+            </p>
+            </div>
           </CardFooter>
         </form>
       </CardContent>

@@ -1,4 +1,5 @@
 
+import CheckoutButton from "@/components/CheckoutButton";
 import { BenefitsSection } from "@/components/sections/intern-benefits";
 import { FAQSection } from "@/components/sections/intern-faqs";
 import { FeaturesSection } from "@/components/sections/intern-features";
@@ -15,7 +16,6 @@ export default function Pro() {
     </>
   );
 }
-
 //<CheckoutButton/>
 //<HeroSection />
 //<PricingSection/>
