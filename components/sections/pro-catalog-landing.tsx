@@ -38,7 +38,7 @@ const products = [
   {
     id: 3,
     title: "1:1 Consultation",
-    description: "Book a consultation with me. I will go over any topic. I will ",
+    description: "Book a consultation with me.",
     type: "ebook",
     icon: <Video className="h-6 w-6" />,
     href: "/tags/internship-mastery",

@@ -40,7 +40,9 @@ export default function SignUpForm() {
       }
     } else {
       console.log("User created and logged in:", data);
-      window.location.href = '/user';  // Redirect to the /user page
+      toast.success("Please check your email to confirm your address.",{
+        duration:5000,
+      });
     }
 
     setLoading(false);
