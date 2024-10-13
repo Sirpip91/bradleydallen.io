@@ -1,5 +1,4 @@
 
-import HandbookCheckout from "@/components/handbook-checkout";
 import CheckoutButton from "@/components/pro-checkout";
 import { BenefitsSection } from "@/components/sections/intern-benefits";
 import { FAQSection } from "@/components/sections/intern-faqs";

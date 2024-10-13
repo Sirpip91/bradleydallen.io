@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import { User } from "@supabase/supabase-js";
 import Link from "next/link";
@@ -26,67 +26,21 @@ import { Separator } from "@/components/ui/separator";
 import { CreditCard, LogOut, Trash2 } from "lucide-react";
 import { createPortalSession } from "@/app/portal/portalActions";
 import toast from "react-hot-toast";
+import { useUser } from "@/components/UserContext"; // Import the custom hook
 
 export default function UserProfile() {
-  const [user, setUser] = useState<User | null>(null);
-  const [stripeCustomer, setStripeCustomer] = useState<any>(null);
+  const { user, stripeCustomer, purchasedProducts, refreshUserData } = useUser(); // Use context
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [hasAccess, setHasAccess] = useState<boolean>(false);
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      setUser(user);
-
-      if (user) {
-        // Fetch one-time payments and pro membership status in parallel
-        const [{ data: paymentData }, { data: proData }] = await Promise.all([
-          supabase
-            .from("one_time_payments")
-            .select("purchased_products")
-            .eq("user_id", user.id)
-            .single(),
-          supabase
-            .from("stripe_customers")
-            .select("pro_active")
-            .eq("user_id", user.id)
-            .single()
-        ]);
-
-          // Check if "handbook" is present in purchased_products array
-        const hasBoughtHandbook = paymentData?.purchased_products?.includes("handbook");
-          // Check if the user is a pro member
-        const isProMember = proData?.pro_active;
-
-        setStripeCustomer({
-          ...proData,
-          purchased_products: paymentData?.purchased_products || [],
-        });
-
-        // Determine if the user has access
-        if (hasBoughtHandbook || isProMember) {
-          setHasAccess(true);
-        }
-      }
-    };
-
-    fetchUserData();
-
-    const { data: authListener } = supabase.auth.onAuthStateChange(
-      (event, session) => {
-        if (event === "SIGNED_IN") {
-          setUser(session?.user ?? null);
-        } else if (event === "SIGNED_OUT") {
-          setUser(null);
-          setHasAccess(false);
-        }
-      }
-    );
-
-    return () => {
-      authListener.subscription.unsubscribe();
-    };
-  }, []);
+    // Determine if the user has access based on purchased products or pro membership
+    if (stripeCustomer) {
+      const hasBoughtHandbook = stripeCustomer.purchased_products?.includes("handbook") || false;
+      const isProMember = stripeCustomer.pro_active || false;
+      setHasAccess(hasBoughtHandbook || isProMember);
+    }
+  }, [stripeCustomer]);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
@@ -94,7 +48,7 @@ export default function UserProfile() {
 
   const handleDeleteAccount = async () => {
     const confirmDelete = confirm("Are you sure you want to delete your account? This action is irreversible.");
-  
+
     if (confirmDelete && user) {
       try {
         const response = await fetch("/api/delete-user", {
@@ -104,10 +58,8 @@ export default function UserProfile() {
           },
           body: JSON.stringify({ userId: user.id }),
         });
-  
+
         if (response.ok) {
-          setUser(null);
-          setStripeCustomer(null);
           handleLogout();
           alert("Your account has been deleted.");
         } else {
@@ -124,27 +76,24 @@ export default function UserProfile() {
 
   const handleClick = async () => {
     try {
-      const { data: { user } } = await supabase.auth.getUser();
-
       if (!user) {
         throw 'Please log in to manage your billing.';
       }
 
       const { data: customer, error: fetchError } = await supabase
-      .from('stripe_customers')
-      .select('stripe_customer_id')
-      .eq('user_id', user.id)
-      .single();
-    
-      const { url } = await createPortalSession(customer?.stripe_customer_id);
+        .from('stripe_customers')
+        .select('stripe_customer_id')
+        .eq('user_id', user.id)
+        .single();
 
+      const { url } = await createPortalSession(customer?.stripe_customer_id);
       window.location.href = url;
 
     } catch (error) {
       console.error(error);
       toast.error('Failed to create billing portal session:');
     }
-  }
+  };
 
   const openConfirmModal = () => {
     setShowConfirmModal(true);
@@ -180,31 +129,11 @@ export default function UserProfile() {
             <Separator />
             <div>
               <h2 className="text-2xl font-bold mb-2">Stripe Information</h2>
-              {stripeCustomer ? (
+              {stripeCustomer || purchasedProducts ? (
                 
-<CardContent className="pt-6">
-  <p>
-    Stripe Customer Name: <strong>{stripeCustomer.customer_name}</strong>
-  </p>
-  
-  {/* Display purchased products if available */}
-  <p>Purchased Content: </p>
-  {stripeCustomer.purchased_products && stripeCustomer.purchased_products.length > 0 ? (
-    <ul className="list-disc pl-6">
-      {stripeCustomer.purchased_products.map((product: string, index: number) => (
-        <li key={index}>
-          <strong className="text-yellow-500">{product}</strong>
-        </li>
-      ))}
-    </ul>
-  ) : (
-    <p className="">
-      Purchased Content: <strong className="text-yellow-500">None</strong>
-    </p>
-  )}
-
+<CardContent>
   {/* Show if the user is a Pro member */}
-  {stripeCustomer.pro_active ? (
+  {stripeCustomer?.pro_active ? (
     <p className="mt-2">
       Membership Status: <strong className="text-yellow-500">Pro Member</strong>
     </p>
@@ -214,28 +143,42 @@ export default function UserProfile() {
     </p>
   )}
 
-  {stripeCustomer.plan_expires && (
+  {/* Show plan expiration date if it exists */}
+  {stripeCustomer?.plan_expires && (
     <p>
-      Plan Expires: <strong>{new Date(stripeCustomer.plan_expires * 1000).toLocaleDateString()}</strong>
+      Plan Expires: <strong>{new Date(Number(stripeCustomer.plan_expires) * 1000).toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })}</strong>
     </p>
   )}
 
+  {/* Show purchased content */}
+  {purchasedProducts.length > 0 ? (
+    <div className="mt-4">
+      <h3 className="text-lg font-bold">Purchased Content:</h3>
+      <ul className="list-disc list-inside mt-2">
+        {purchasedProducts.map((product, index) => (
+          <li key={index} className="text-md text-yellow-500">{product}</li>
+        ))}
+      </ul>
+    </div>
+  ) : (
+    <p className="mt-2">No purchased content available.</p>
+  )}
+
   <p className="text-sm text-muted-foreground mt-2">Thank you for being a customer!</p>
+  
   <div className="mt-4">
     <Button onClick={handleClick} variant="outline" size="lg" className="w-full">
       <CreditCard className="mr-2 h-4 w-4" /> Manage Billing
     </Button>
   </div>
 </CardContent>
+
                 
               ) : (
                 
                   <CardContent className="pt-2">
                   <p className="text-lg">
                       Stripe Customer Name: <strong className="text-yellow-500"> N/A</strong>
-                    </p>
-                    <p className="text-lg">
-                      Purchased Content: <strong className="text-yellow-500">N/A</strong>
                     </p>
                   </CardContent>
                 

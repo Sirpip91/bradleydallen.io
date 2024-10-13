@@ -7,6 +7,8 @@ import { Providers } from "@/components/providers";
 import { siteConfig } from "@/config/site";
 import { SiteFooter } from "@/components/site-footer";
 import { Toaster } from "react-hot-toast";
+import { UserProvider } from "@/components/UserContext";
+
 
 
 const inter = Inter({
@@ -41,12 +43,14 @@ export default function RootLayout({
       >
         
         <Providers>
+          <UserProvider>
           <div className="relative flex min-h-dvh flex-col bg-background">
             <SiteHeader />
             <main className="flex-1">{children}</main>
             
             <SiteFooter />
           </div>
+          </UserProvider>
         </Providers>
         <Toaster/>
       </body>

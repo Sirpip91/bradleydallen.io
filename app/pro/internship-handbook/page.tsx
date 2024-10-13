@@ -1,76 +1,22 @@
 "use client";
 
-import { useState, useEffect } from 'react'
-import Image from 'next/image'
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { CheckCircle, ArrowRight } from "lucide-react"
-import { supabase } from '@/lib/supabaseClient'
-import { User } from '@supabase/supabase-js'
-import handbook from '../../../content/content/img/handbook.jpg'
+import { useEffect } from 'react';
+import Image from 'next/image';
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { CheckCircle, ArrowRight } from "lucide-react";
+import handbook from '../../../content/content/img/handbook.jpg';
 import toast from 'react-hot-toast';
 import { loadStripe } from '@stripe/stripe-js';
 import Link from 'next/link';
-
+import { useUser } from '@/components/UserContext'; // Import your UserContext
 
 export default function InternshipHandbookLanding() {
-  const [user, setUser] = useState<User | null>(null);
-  const [hasAccess, setHasAccess] = useState<boolean>(false);
-
-  useEffect(() => {
-    const fetchUserData = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      setUser(user);
-
-      if (user) {
-        // Fetch one-time payments and pro membership status in parallel
-        const [{ data: paymentData }, { data: proData }] = await Promise.all([
-          supabase
-            .from("one_time_payments")
-            .select("purchased_products")
-            .eq("user_id", user.id)
-            .single(),
-          supabase
-            .from("stripe_customers")
-            .select("pro_active")
-            .eq("user_id", user.id)
-            .single()
-        ]);
-
-        // Check if "handbook" is present in purchased_products array
-        const hasBoughtHandbook = paymentData?.purchased_products?.includes("handbook");
-        // Check if the user is a pro member
-        const isProMember = proData?.pro_active;
-
-        // Determine if the user has access
-        if (hasBoughtHandbook || isProMember) {
-          setHasAccess(true);
-        }
-      }
-    };
-
-    fetchUserData();
-
-    const { data: authListener } = supabase.auth.onAuthStateChange(
-      (event, session) => {
-        if (event === "SIGNED_IN") {
-          setUser(session?.user ?? null);
-        } else if (event === "SIGNED_OUT") {
-          setUser(null);
-          setHasAccess(false);
-        }
-      }
-    );
-
-    return () => {
-      authListener.subscription.unsubscribe();
-    };
-  }, []);
+  const { user, purchasedProducts, loading } = useUser(); // Destructure user data
+  const hasAccess = purchasedProducts.includes("handbook"); // Check access based on purchased products
 
   const handleCheckout = async (priceId: string, productName: string) => {
-    const { data } = await supabase.auth.getUser();
-
-    if (!data?.user) {
+    if (!user) {
       toast.error("Please log in to create a new Stripe Checkout session");
       return;
     }
@@ -85,10 +31,10 @@ export default function InternshipHandbookLanding() {
       },
       body: JSON.stringify({
         priceId: priceId,
-        userId: data.user?.id,
-        email: data.user?.email,
+        userId: user.id,
+        email: user.email,
         buyMode: 'payment',
-        product_name: productName
+        product_name: productName,
       }),
     });
     const session = await response.json();
@@ -101,7 +47,11 @@ export default function InternshipHandbookLanding() {
     "Insider knowledge on navigating the internship process",
     "Strategies for networking and building professional relationships",
     "PDF Download and Full Access on Content page"
-  ]
+  ];
+
+  if (loading) {
+    return <div className="text-center">Loading...</div>; // Show loading state
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -151,10 +101,10 @@ export default function InternshipHandbookLanding() {
                   </Button>
                   <p className='text-3xl text-center pb-4'>or</p>
                   <Link href="/pro" passHref>
-                  <Button size="lg" variant="outline" className="w-full">
-                    Get Pro Access to All Content
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Button>
+                    <Button size="lg" variant="outline" className="w-full">
+                      Get Pro Access to All Content
+                      <ArrowRight className="ml-2 h-5 w-5" />
+                    </Button>
                   </Link>
                 </>
               )}
@@ -181,14 +131,16 @@ export default function InternshipHandbookLanding() {
                 Pre Purchase Now!
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
-              <Button size="lg" variant="outline">
-                Get Pro Access
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
+              <Link href="/pro" passHref>
+                <Button size="lg" variant="outline">
+                  Get Pro Access
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
             </div>
           )}
         </section>
       </main>
     </div>
-  )
+  );
 }
