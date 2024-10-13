@@ -48,23 +48,22 @@ export default function Home() {
   return (
     <>
 
-      <section className="space-y-6 pb-8 pt-6 md:pb-12 md:mt-10 lg:py-32">
+<section className="space-y-6 pb-8 pt-6 md:pb-12 md:mt-10 lg:py-32">
         <div className="container flex flex-col gap-4 text-center">
-          <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-6xl font-black text-balance">
-            Learn <span className="relative group inline-block">Knowledge
-              <Image 
-                src={gif} // Use the imported GIF here
-                alt="Meme GIF"
-                className="absolute left-1/2 transform -translate-x-1/2 -top-24 transition-opacity duration-300 opacity-0 group-hover:opacity-100" // Adjust -top value for positioning
-                width={160} // Increased width (in pixels)
-                height={160} // Increased height (in pixels)
-              />
-            </span> That Matters
+        <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-6xl font-black text-balance">
+          Learn <span className="relative group inline-block">Knowledge
+          <Image 
+          src={gif} // Use the imported GIF here
+          alt="Meme GIF"
+          className="absolute left-1/2 transform -translate-x-1/2 -top-24 transition-opacity duration-300 opacity-0 group-hover:opacity-100" // Adjust -top value for positioning
+          width={160} // Increased width (in pixels)
+          height={160} // Increased height (in pixels)
+        />
+              </span> That Matters
           </h1>
           <p className="max-w-[42rem] mx-auto text-muted-foreground sm:text-xl text-balance">
-            Master Computer Science Concepts that Schools Don&apos;t Teach
+          Master Computer Science concepts that schools don&apos;t teach
           </p>
-
           <div className="flex flex-col gap-4 justify-center sm:flex-row">
             <Link
               href="/content"
@@ -73,13 +72,13 @@ export default function Home() {
               View Content
             </Link>
             <Link
-              href={isSignedIn ? "/user" : "/signup"} // Change the link based on the sign-in state
+              href="/pro"
               className={cn(
                 buttonVariants({ variant: "outline", size: "lg" }),
                 "w-full sm:w-fit text-lg font-medium"
               )}
             >
-              {isSignedIn ? "View Profile" : "Join the Community"}
+              Join the Community
             </Link>
           </div>
         </div>
