@@ -126,7 +126,7 @@ export default function InternshipHandbookLanding() {
             />
           </div>
           <div>
-            <h2 className="text-3xl font-bold mb-6">What You'll Get</h2>
+            <h2 className="text-3xl font-bold mb-6">What You&apos;ll Get</h2>
             <ul className="space-y-4">
               {benefits.map((benefit, index) => (
                 <li key={index} className="flex items-start">
