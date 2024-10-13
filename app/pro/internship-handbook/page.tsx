@@ -127,10 +127,12 @@ export default function InternshipHandbookLanding() {
             </Link>
           ) : (
             <div className="space-x-4">
-              <Button size="lg" onClick={() => handleCheckout('price_1Q9DBNFRcXq5egITwC6RNY0k', 'handbook')}>
-                Pre Purchase Now!
+              <Link href="/tags/internship-handbook" passHref>
+              <Button size="lg">
+                Try for Free
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
+              </Link>
               <Link href="/pro" passHref>
                 <Button size="lg" variant="outline">
                   Get Pro Access
