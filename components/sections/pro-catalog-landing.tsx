@@ -9,7 +9,6 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { Video, FileText, ArrowRight, Check } from "lucide-react";
 import { TestimonialSection } from "./intern-testomonials";
 import { cn } from "@/lib/utils";
-import CheckoutButton from "@/components/pro-checkout";
 import { loadStripe } from "@stripe/stripe-js";
 import toast from "react-hot-toast";
 import { supabase } from "@/lib/supabaseClient";
@@ -41,7 +40,7 @@ const products = [
     type: "TBA",
     icon: <FileText className="h-6 w-6" />,
     href: "pro/internship-handbook",
-    price: "20",
+    price: "30",
     image: handbook,
   },
   // Uncomment this section if you want to include the consultation product
@@ -77,7 +76,7 @@ const handleCheckout = async () => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ 
-      priceId: 'price_1Q8TGYFRcXq5egITPV5xCpEl', 
+      priceId: 'price_1Q9US3FRcXq5egITtcp5OySC', 
       userId: data.user?.id, 
       email: data.user?.email,
       buyMode: 'subscription' 
@@ -142,7 +141,7 @@ export default function ProCatalogLanding() {
                   </ul>
                 </div>
                 <div className="text-center md:text-right">
-                  <p className="text-2xl font-bold mb-4">$29.99/month</p>
+                  <p className="text-2xl font-bold mb-4">$20/month</p>
 
                   {hasAccess ? (
                     <Button variant="default" size="lg" className="w-full md:w-auto">

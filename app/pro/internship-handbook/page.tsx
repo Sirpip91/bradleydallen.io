@@ -95,8 +95,8 @@ export default function InternshipHandbookLanding() {
                 </Link>
               ) : (
                 <>
-                  <Button size="lg" className="w-full" onClick={() => handleCheckout('price_1Q9DBNFRcXq5egITwC6RNY0k', 'handbook')}>
-                    Pre Purchase Handbook $20
+                  <Button size="lg" className="w-full" onClick={() => handleCheckout('price_1Q9UdZFRcXq5egIT5yryhK9H', 'handbook')}>
+                    Pre Purchase Handbook $30
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
                   <p className='text-3xl text-center pb-4'>or</p>

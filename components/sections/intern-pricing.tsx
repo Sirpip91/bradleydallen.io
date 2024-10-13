@@ -136,7 +136,7 @@ export const PricingSection = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ priceId: 'price_1PN2guFRcXq5egITHtAIiRnm', userId: data.user?.id, email: data.user?.email }),
+        body: JSON.stringify({ priceId: '1PN2guFRcXq5egITHtAIiRnm', userId: data.user?.id, email: data.user?.email }),
       });
     const session = await response.json();
     await stripe?.redirectToCheckout({ sessionId: session.id });

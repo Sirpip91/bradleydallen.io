@@ -64,7 +64,7 @@ export function ProHandbook({
             <div className="space-y-4">
               <Link href="/pro/internship-handbook" className="block">
                 <Button size="lg" className="w-full text-lg">
-                  Purchase Handbook $20
+                  Purchase Handbook $30
                 </Button>
               </Link>
               <div className="relative">
@@ -141,7 +141,7 @@ export function ProDSA({
             <div className="space-y-4">
               <Link href="/pro/data-structures" className="block">
                 <Button size="lg" className="w-full text-lg">
-                  Purchase Data Structures $20
+                  Purchase Data Structures $30
                 </Button>
               </Link>
               <div className="relative">
