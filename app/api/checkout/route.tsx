@@ -1,6 +1,7 @@
 'use server';
 import { NextResponse } from 'next/server';
 import { stripe } from "@/lib/stripe";
+import { FcGoogle } from 'react-icons/fc';
 
 export async function POST(request: Request) {
     try {
@@ -19,7 +20,7 @@ export async function POST(request: Request) {
                 product_name: product_name,
             },
             customer_email: email,
-            payment_method_types: ['card'],
+            payment_method_types: ['card','cashapp'],
             line_items: [
                 {
                     price: priceId,
