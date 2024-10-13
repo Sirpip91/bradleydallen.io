@@ -12,8 +12,8 @@ import Link from 'next/link';
 import { useUser } from '@/components/UserContext'; // Import your UserContext
 
 export default function InternshipHandbookLanding() {
-  const { user, purchasedProducts, loading } = useUser(); // Destructure user data
-  const hasAccess = purchasedProducts.includes("handbook"); // Check access based on purchased products
+  const { user, purchasedProducts, stripeCustomer, loading } = useUser(); // Destructure user data
+  const hasAccess = purchasedProducts.includes("handbook") || stripeCustomer?.pro_active===true; // Check access based on purchased products
 
   const handleCheckout = async (priceId: string, productName: string) => {
     if (!user) {
