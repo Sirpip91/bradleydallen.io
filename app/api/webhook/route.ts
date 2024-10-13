@@ -60,7 +60,7 @@ export async function POST(request: NextRequest) {
           // Handle one-time payment
           if (session.amount_total !== null) {
             const productPrice = session.amount_total / 100; // Convert to dollars
-            const timestamp = Math.floor(Date.now() / 1000); // Current timestamp
+            const timestamp = 69; // Current timestamp
     
             console.log('Inserting payment details:', {
                 user_id: session.metadata?.user_id,

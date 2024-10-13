@@ -52,6 +52,13 @@ export default function Home() {
         <div className="container flex flex-col gap-4 text-center">
           <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-6xl font-black text-balance">
             Learn <span className="relative group inline-block">Knowledge
+              <Image 
+                src={gif} // Use the imported GIF here
+                alt="Meme GIF"
+                className="absolute left-1/2 transform -translate-x-1/2 -top-24 transition-opacity duration-300 opacity-0 group-hover:opacity-100" // Adjust -top value for positioning
+                width={160} // Increased width (in pixels)
+                height={160} // Increased height (in pixels)
+              />
             </span> That Matters
           </h1>
           <p className="max-w-[42rem] mx-auto text-muted-foreground sm:text-xl text-balance">
