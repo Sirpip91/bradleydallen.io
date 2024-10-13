@@ -10,6 +10,18 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'User ID is required' }, { status: 400 });
     }
 
+            // Delete from one_time_payments table
+            const { error: deletePaymentError } = await supabaseAdmin
+            .from('one_time_payments')
+            .delete()
+            .eq('user_id', userId);
+
+        if (deletePaymentError) {
+            console.error('Error deleting user from one_time_payments table:', deletePaymentError);
+            return NextResponse.json({ error: deletePaymentError.message }, { status: 500 });
+        }
+
+
 
         // delete stripe customer first then auth.
         const { error: deleteStripeError } = await supabaseAdmin
@@ -21,6 +33,7 @@ export async function POST(request: NextRequest) {
         console.error('Error deleting user from stripe_customers table:', deleteStripeError);
         return NextResponse.json({ error: deleteStripeError.message }, { status: 500 });
       }
+      
 
     // Use Supabase Auth API to delete the user
     const { error } = await supabaseAdmin.auth.admin.deleteUser(userId);
