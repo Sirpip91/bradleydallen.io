@@ -128,7 +128,7 @@ export default function Home() {
       </section>
 
       <section className="container max-w-4xl py-6  flex flex-col space-y-6 mt-20">
-      
+      <div>
         <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-6xl font-black text-center">
          Latest Content
         </h2>
@@ -147,6 +147,7 @@ export default function Home() {
             )
           ))}
         </ul>
+        </div>
       </section>
     </>
   );
