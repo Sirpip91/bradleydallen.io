@@ -72,7 +72,7 @@ export default function CheckoutButton() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ priceId: 'price_1PN2guFRcXq5egITHtAIiRnm', userId: data.user?.id, email: data.user?.email }),
+        body: JSON.stringify({ priceId: 'price_1Q8TGYFRcXq5egITPV5xCpEl', userId: data.user?.id, email: data.user?.email,buyMode:'subscription',product_name:'Pro',}),
       });
     const session = await response.json();
     await stripe?.redirectToCheckout({ sessionId: session.id });
@@ -83,7 +83,7 @@ export default function CheckoutButton() {
 
     {stripeCustomer ? (
         <>
-          <h1>You already bought</h1>
+          <h1>Your are a Pro Member! You have full access to this content 🎉</h1>
           {stripeCustomer ? (<>
             
             <Link
@@ -108,7 +108,7 @@ export default function CheckoutButton() {
          
 
           
-              <p>Clicking this button creates a new Stripe Checkout session</p>
+              <p>Clicking this button lets you buy Pro Membership</p>
               <p className="text-yellow-500">
               <button className="btn btn-accent" onClick={handleCheckout}>Buy Now</button>
               </p>

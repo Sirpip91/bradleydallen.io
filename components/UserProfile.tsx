@@ -23,44 +23,62 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";
-import { LogOut, Trash2 } from "lucide-react";
+import { CreditCard, LogOut, Trash2 } from "lucide-react";
+import { createPortalSession } from "@/app/portal/portalActions";
+import toast from "react-hot-toast";
 
 export default function UserProfile() {
   const [user, setUser] = useState<User | null>(null);
   const [stripeCustomer, setStripeCustomer] = useState<any>(null);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [hasAccess, setHasAccess] = useState<boolean>(false);
 
   useEffect(() => {
-    const fetchUser = async () => {
+    const fetchUserData = async () => {
       const { data: { user } } = await supabase.auth.getUser();
       setUser(user);
 
       if (user) {
-        const { data: stripeCustomerData, error } = await supabase
-          .from("stripe_customers")
-          .select("*")
-          .eq("user_id", user.id)
-          .single();
+        // Fetch one-time payments and pro membership status in parallel
+        const [{ data: paymentData }, { data: proData }] = await Promise.all([
+          supabase
+            .from("one_time_payments")
+            .select("purchased_products")
+            .eq("user_id", user.id)
+            .single(),
+          supabase
+            .from("stripe_customers")
+            .select("pro_active")
+            .eq("user_id", user.id)
+            .single()
+        ]);
 
-        if (error) {
-          console.log("No stripe customer data found");
-        } else {
-          setStripeCustomer(stripeCustomerData);
+          // Check if "handbook" is present in purchased_products array
+        const hasBoughtHandbook = paymentData?.purchased_products?.includes("handbook");
+          // Check if the user is a pro member
+        const isProMember = proData?.pro_active;
+
+        setStripeCustomer({
+          ...proData,
+          purchased_products: paymentData?.purchased_products || [],
+        });
+
+        // Determine if the user has access
+        if (hasBoughtHandbook || isProMember) {
+          setHasAccess(true);
         }
       }
     };
 
-    fetchUser();
+    fetchUserData();
 
     const { data: authListener } = supabase.auth.onAuthStateChange(
       (event, session) => {
         if (event === "SIGNED_IN") {
-          if (session) {
-            setUser(session.user);
-          }
+          setUser(session?.user ?? null);
         } else if (event === "SIGNED_OUT") {
           setUser(null);
-          setStripeCustomer(null);
+          setHasAccess(false);
         }
       }
     );
@@ -104,6 +122,30 @@ export default function UserProfile() {
     }
   };
 
+  const handleClick = async () => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+
+      if (!user) {
+        throw 'Please log in to manage your billing.';
+      }
+
+      const { data: customer, error: fetchError } = await supabase
+      .from('stripe_customers')
+      .select('stripe_customer_id')
+      .eq('user_id', user.id)
+      .single();
+    
+      const { url } = await createPortalSession(customer?.stripe_customer_id);
+
+      window.location.href = url;
+
+    } catch (error) {
+      console.error(error);
+      toast.error('Failed to create billing portal session:');
+    }
+  }
+
   const openConfirmModal = () => {
     setShowConfirmModal(true);
   };
@@ -140,15 +182,51 @@ export default function UserProfile() {
               <h2 className="text-2xl font-bold mb-2">Stripe Information</h2>
               {stripeCustomer ? (
                 
-                  <CardContent className="pt-6">
-                    <p>
-                      Stripe Customer Name: <strong>{stripeCustomer.customer_name}</strong>
-                    </p>
-                    <p>
-                      Purchased Content: <strong className="text-yellow-500">{stripeCustomer.has_paid}</strong>
-                    </p>
-                    <p className="text-sm text-muted-foreground mt-2">Thank you for being a customer!</p>
-                  </CardContent>
+<CardContent className="pt-6">
+  <p>
+    Stripe Customer Name: <strong>{stripeCustomer.customer_name}</strong>
+  </p>
+  
+  {/* Display purchased products if available */}
+  <p>Purchased Content: </p>
+  {stripeCustomer.purchased_products && stripeCustomer.purchased_products.length > 0 ? (
+    <ul className="list-disc pl-6">
+      {stripeCustomer.purchased_products.map((product: string, index: number) => (
+        <li key={index}>
+          <strong className="text-yellow-500">{product}</strong>
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <p className="">
+      Purchased Content: <strong className="text-yellow-500">None</strong>
+    </p>
+  )}
+
+  {/* Show if the user is a Pro member */}
+  {stripeCustomer.pro_active ? (
+    <p className="mt-2">
+      Membership Status: <strong className="text-yellow-500">Pro Member</strong>
+    </p>
+  ) : (
+    <p className="mt-2">
+      Membership Status: <strong className="text-red-500">Not a Pro Member</strong>
+    </p>
+  )}
+
+  {stripeCustomer.plan_expires && (
+    <p>
+      Plan Expires: <strong>{new Date(stripeCustomer.plan_expires * 1000).toLocaleDateString()}</strong>
+    </p>
+  )}
+
+  <p className="text-sm text-muted-foreground mt-2">Thank you for being a customer!</p>
+  <div className="mt-4">
+    <Button onClick={handleClick} variant="outline" size="lg" className="w-full">
+      <CreditCard className="mr-2 h-4 w-4" /> Manage Billing
+    </Button>
+  </div>
+</CardContent>
                 
               ) : (
                 

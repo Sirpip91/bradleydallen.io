@@ -1,3 +1,4 @@
+"use client";
 import { buttonVariants } from "@/components/ui/button";
 import { siteConfig } from "@/config/site";
 import { cn, sortPosts } from "@/lib/utils";
@@ -8,27 +9,62 @@ import { CheckCircle, BookOpen, Zap, Users } from 'lucide-react';
 import { TestimonialSection } from "@/components/sections/intern-testomonials";
 import Image from 'next/image';
 import gif from"@/content/content/img/knowledge.gif"
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabaseClient";
+import { User } from "@supabase/supabase-js";
 export default function Home() {
   const latestPosts = sortPosts(posts).slice(0, 3);
+  const [user, setUser] = useState<User | null>(null);
+  const [isSignedIn, setIsSignedIn] = useState<boolean>(false);
+
+  useEffect(() => {
+    const checkAuthStatus = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      setUser(user);
+      setIsSignedIn(!!user); // Set isSignedIn to true if the user exists
+    };
+
+    checkAuthStatus();
+
+    const { data: authListener } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        if (event === "SIGNED_IN") {
+          setUser(session?.user ?? null);
+          setIsSignedIn(true); // Update when signed in
+        } else if (event === "SIGNED_OUT") {
+          setUser(null);
+          setIsSignedIn(false); // Update when signed out
+        }
+      }
+    );
+
+    return () => {
+      authListener.subscription.unsubscribe();
+    };
+  }, []);
+
+
+
   return (
     <>
 
       <section className="space-y-6 pb-8 pt-6 md:pb-12 md:mt-10 lg:py-32">
         <div className="container flex flex-col gap-4 text-center">
-        <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-6xl font-black text-balance">
-          Learn <span className="relative group inline-block">Knowledge
-          <Image 
-          src={gif} // Use the imported GIF here
-          alt="Meme GIF"
-          className="absolute left-1/2 transform -translate-x-1/2 -top-24 transition-opacity duration-300 opacity-0 group-hover:opacity-100" // Adjust -top value for positioning
-          width={160} // Increased width (in pixels)
-          height={160} // Increased height (in pixels)
-        />
-              </span> That Matters
+          <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-6xl font-black text-balance">
+            Learn <span className="relative group inline-block">Knowledge
+              <Image 
+                src={gif} // Use the imported GIF here
+                alt="Meme GIF"
+                className="absolute left-1/2 transform -translate-x-1/2 -top-24 transition-opacity duration-300 opacity-0 group-hover:opacity-100" // Adjust -top value for positioning
+                width={160} // Increased width (in pixels)
+                height={160} // Increased height (in pixels)
+              />
+            </span> That Matters
           </h1>
           <p className="max-w-[42rem] mx-auto text-muted-foreground sm:text-xl text-balance">
-          Master Computer Science Concepts that Schools Don&apos;t Teach
+            Master Computer Science Concepts that Schools Don&apos;t Teach
           </p>
+
           <div className="flex flex-col gap-4 justify-center sm:flex-row">
             <Link
               href="/content"
@@ -37,17 +73,19 @@ export default function Home() {
               View Content
             </Link>
             <Link
-              href="/signup"
+              href={isSignedIn ? "/user" : "/signup"} // Change the link based on the sign-in state
               className={cn(
                 buttonVariants({ variant: "outline", size: "lg" }),
                 "w-full sm:w-fit text-lg font-medium"
               )}
             >
-              Join the Community
+              {isSignedIn ? "View Profile" : "Join the Community"}
             </Link>
           </div>
         </div>
       </section>
+
+
 
       <section className="container max-w-5xl py-12 lg:py-20">
         <h2 className="text-3xl font-bold text-center mb-3">Welcome to bradleydallen.io</h2>

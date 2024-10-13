@@ -3,57 +3,67 @@ import { supabase } from "@/lib/supabaseClient";
 import { cn } from "@/lib/utils";
 import { User } from "@supabase/supabase-js";
 import { ReactNode, useEffect, useState } from "react";
-
-
-
+import { Button } from "./ui/button";
+import { ArrowRight, Lock } from "lucide-react";
+import Link from "next/link";
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 
 interface CalloutProps {
   children?: ReactNode;
   type?: "default" | "warning" | "danger";
 }
 
-export function Callout({
+//Hide Pro content.
+export function ProHandbook({
   children,
   type = "default",
   ...props
 }: CalloutProps) {
-
   const [user, setUser] = useState<User | null>(null);
-  const [stripeCustomer, setStripeCustomer] = useState<any>(null);
+  const [hasAccess, setHasAccess] = useState<boolean>(false);
 
   useEffect(() => {
-    const fetchUser = async () => {
+    const fetchUserData = async () => {
       const { data: { user } } = await supabase.auth.getUser();
       
       setUser(user);
 
       if (user) {
-        const { data: stripeCustomerData, error } = await supabase
-          .from("stripe_customers")
-          .select("*")
-          .eq("user_id", user.id)
-          .single();
+        // Fetch one-time payments and pro membership status in parallel
+        const [{ data: paymentData }, { data: proData }] = await Promise.all([
+          supabase
+            .from("one_time_payments")
+            .select("purchased_products")
+            .eq("user_id", user.id)
+            .single(),
+          supabase
+            .from("stripe_customers")
+            .select("pro_active")
+            .eq("user_id", user.id)
+            .single()
+        ]);
 
-        if (error) {
-          console.log("No stripe customer data found",);
-        } else {
-          setStripeCustomer(stripeCustomerData);
-          console.log("working");
+        // Check if "handbook" is present in purchased_products array
+        const hasBoughtHandbook = paymentData?.purchased_products?.includes("handbook");
+        // Check if the user is a pro member
+        const isProMember = proData?.pro_active;
+
+        // Determine if the user has access
+        if (hasBoughtHandbook || isProMember) {
+          setHasAccess(true);
         }
       }
     };
 
-    fetchUser();
+    fetchUserData();
 
     const { data: authListener } = supabase.auth.onAuthStateChange(
       (event, session) => {
         if (event === "SIGNED_IN") {
-          if (session) {
-            setUser(session.user);
-          }
+          setUser(session?.user ?? null);
         } else if (event === "SIGNED_OUT") {
           setUser(null);
-          setStripeCustomer(null);
+          setHasAccess(false);
         }
       }
     );
@@ -62,35 +72,179 @@ export function Callout({
       authListener.subscription.unsubscribe();
     };
   }, []);
+
   return (
-    
     <div
       className={cn(
-        "my-6 items-start rounded-md border boder-l-4 p-4 w-full dark:max-w-none",
+        "pb-10 pt-10",
         {
           "border-red-900 bg-red-50 dark:prose": type === "danger",
-          "content-center border-black-900 text-xl text-center": type === "warning",
+          "": !hasAccess && type === "warning", // Apply warning style only when no access
         }
-        
       )}
       {...props}
     >
-      {stripeCustomer ? (<>
+      {hasAccess ? (
+        <div>{children}</div>
+      ) : (
+
+      <Card className="w-full max-w-md mx-auto overflow-hidden">
+      <CardHeader className="bg-secondary pb-8 pt-6">
+        <div className="flex flex-col items-center justify-center space-y-2">
+          <Lock className="w-12 h-12 text-primary" />
+          <CardTitle className="text-2xl font-bold">Premium Content</CardTitle>
+        </div>
+      </CardHeader>
+      <CardContent className="p-6 space-y-6">
+        <div className="space-y-4">
+          <Link href="/pro/internship-handbook" className="block">
+            <Button size="lg" className="w-full text-lg">
+              Purchase Handbook $20
+            </Button>
+          </Link>
+          <div className="relative">
+            <div className="absolute inset-0 flex items-center">
+              <span className="w-full border-t border-muted" />
+            </div>
+            <div className="relative flex justify-center text-xs uppercase">
+              <span className="bg-background px-2 text-muted-foreground">Or</span>
+            </div>
+          </div>
+          <Link href="/pro" className="block">
+          <Button size="lg" variant="outline" className="w-full text-lg">
+            Get <span className="px-1 text-customRed">Pro</span> Access
+          </Button>
+
+          </Link>
+        </div>
+        <p className="text-sm text-center text-muted-foreground">
+          Already have an account?{" "}
+          <Link href="/login" className="font-medium text-primary hover:underline">
+            Log in
+          </Link>
+        </p>
+      </CardContent>
+    </Card>
+        
+
+      )}
+    </div>
+  );
+}
+//Use DSACallout to hide DSA premium content.
+export function ProDSA({
+  children,
+  type = "default",
+  ...props
+}: CalloutProps) {
+  const [user, setUser] = useState<User | null>(null);
+  const [hasAccess, setHasAccess] = useState<boolean>(false);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      
+      setUser(user);
+
+      if (user) {
+        // Fetch one-time payments and pro membership status in parallel
+        const [{ data: paymentData }, { data: proData }] = await Promise.all([
+          supabase
+            .from("one_time_payments")
+            .select("purchased_products")
+            .eq("user_id", user.id)
+            .single(),
+          supabase
+            .from("stripe_customers")
+            .select("pro_active")
+            .eq("user_id", user.id)
+            .single()
+        ]);
+
+        // Check if "dsa" is present in purchased_products array
+        const hasBoughtDSA = paymentData?.purchased_products?.includes("dsa");
+        // Check if the user is a pro member
+        const isProMember = proData?.pro_active;
+
+        // Determine if the user has access
+        if (hasBoughtDSA || isProMember) {
+          setHasAccess(true);
+        }
+      }
+    };
+
+    fetchUserData();
+
+    const { data: authListener } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        if (event === "SIGNED_IN") {
+          setUser(session?.user ?? null);
+        } else if (event === "SIGNED_OUT") {
+          setUser(null);
+          setHasAccess(false);
+        }
+      }
+    );
+
+    return () => {
+      authListener.subscription.unsubscribe();
+    };
+  }, []);
+
+  return (
+    <div
+      className={cn(
+        "pb-10 pt-10",
+        {
+          "border-red-900 bg-red-50 dark:prose": type === "danger",
+          "": !hasAccess && type === "warning", // Apply warning style only when no access
+        }
+      )}
+      {...props}
+    >
+      {hasAccess ? (
+        <div>{children}</div>
+      ) : (
+        <Card className="w-full max-w-md mx-auto overflow-hidden">
+        <CardHeader className="bg-secondary pb-8 pt-6">
+          <div className="flex flex-col items-center justify-center space-y-2">
+            <Lock className="w-12 h-12 text-primary" />
+            <CardTitle className="text-2xl font-bold">Premium Content</CardTitle>
+          </div>
+        </CardHeader>
+        <CardContent className="p-6 space-y-6">
+          <div className="space-y-4">
+            <Link href="/pro/data-structures" className="block">
+              <Button size="lg" className="w-full text-lg">
+                Purchase Data Structures $20
+              </Button>
+            </Link>
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <span className="w-full border-t border-muted" />
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-background px-2 text-muted-foreground">Or</span>
+              </div>
+            </div>
+            <Link href="/pro" className="block">
+            <Button size="lg" variant="outline" className="w-full text-lg">
+              Get <span className="px-1 text-customRed">Pro</span> Access
+            </Button>
   
-      <div>{children}</div>
-
-
-      </>
-) : (
-  <div>
-  <p className="text-customRed">
-    To view the videos please <a href="/pro" className="text-customRed underline">purchase Pro Membership!</a>
-  </p>
-</div>
-
-)}
+            </Link>
+          </div>
+          <p className="text-sm text-center text-muted-foreground">
+            Already have an account?{" "}
+            <Link href="/login" className="font-medium text-primary hover:underline">
+              Log in
+            </Link>
+          </p>
+        </CardContent>
+      </Card>
+      )}
     </div>
   );
 }
 
-
+//Hide more here

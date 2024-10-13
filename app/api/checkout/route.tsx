@@ -1,30 +1,32 @@
+'use server';
 import { NextResponse } from 'next/server';
 import { stripe } from "@/lib/stripe";
 
 export async function POST(request: Request) {
     try {
-        const { priceId, email, userId } = await request.json();
+        const { priceId, email, userId, buyMode, product_name } = await request.json();
 
         console.log('Creating Checkout Session with the following details:');
         console.log('Price ID:', priceId);
         console.log('Email:', email);
         console.log('User ID:', userId);
-
+        console.log('BuyMode:', buyMode)
+        console.log('product_name:', product_name)
         const session = await stripe.checkout.sessions.create({
             metadata: {
                 user_id: userId,
+                buyMode: buyMode,
+                product_name: product_name,
             },
-            customer_creation: 'always',
             customer_email: email,
             payment_method_types: ['card'],
             line_items: [
                 {
-                    // one-time setup fee
-                    price: 'price_1PN2guFRcXq5egITHtAIiRnm',
+                    price: priceId,
                     quantity: 1,
                 },
             ],
-            mode: 'payment',
+            mode: buyMode,
             success_url: `${request.headers.get('origin')}/success`,
             cancel_url: `${request.headers.get('origin')}/pro`,
         });

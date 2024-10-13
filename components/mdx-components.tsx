@@ -1,7 +1,7 @@
 import Image from "next/image";
 import * as runtime from "react/jsx-runtime";
 import { cn } from "@/lib/utils";
-import { Callout } from "./callout";
+import { ProHandbook, ProDSA } from "./callout";
 import {Quote} from "./quote";
 
 const useMDXComponent = (code: string) => {
@@ -11,8 +11,9 @@ const useMDXComponent = (code: string) => {
 
 const components = {
   Image,
-  Callout,
+  ProHandbook,
   Quote,
+  ProDSA,//add more callouts here.
   h1: ({
     className,
     ...props
