@@ -165,7 +165,7 @@ export default function InternshipHandbookLanding() {
         <section className="mt-20 text-center">
           <h2 className="text-3xl font-bold mb-4">Ready to Supercharge Your Internship Journey?</h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto">
-            Don't miss out on the opportunity to gain a competitive edge in your internship search.
+            Don&apos;t miss out on the opportunity to gain a competitive edge in your internship search.
             Get your copy of the Internship Mastery Handbook today!
           </p>
           {hasAccess ? (
