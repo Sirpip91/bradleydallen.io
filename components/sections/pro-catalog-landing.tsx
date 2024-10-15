@@ -76,7 +76,7 @@ const handleCheckout = async () => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ 
-      priceId: 'price_1Q9US3FRcXq5egITtcp5OySC', 
+      priceId: 'price_1Q9yOhFRcXq5egITNH1AX2nD', 
       userId: data.user?.id, 
       email: data.user?.email,
       buyMode: 'subscription' 

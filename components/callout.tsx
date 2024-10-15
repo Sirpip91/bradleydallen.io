@@ -42,7 +42,7 @@ export function ProHandbook({
   return (
     <div
       className={cn(
-        "pb-10 pt-10",
+        "pb-10",
         {
           "border-red-900 bg-red-50 dark:prose": type === "danger",
           "": !hasAccess && type === "warning", // Apply warning style only when no access
