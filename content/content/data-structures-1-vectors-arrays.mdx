@@ -1,0 +1,405 @@
+---
+title: Mastering Arrays & Vectors Programming (C++) STL
+description: From basic array manipulation to advanced vector functions, you'll learn how to efficiently use these essential containers
+date: 2024-10-06
+tags: ["Data-Structures"]
+published: true
+---
+
+# Video Guide
+<Quote>
+  <div>
+    <iframe
+      width="560"
+      height="315"
+      className="aspect-video w-full"
+      src="https://www.youtube.com/embed/RaiKIoEpIUE?si=NXYHWPUrZ1_QopcO&rel=0"
+      title="Video Guide on Installing Windows 11"
+      allow="fullscreen; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      aria-label="Video Guide on Installing Windows 11"
+    ></iframe>
+  </div>
+</Quote>
+
+# What is Array?
+Array is collection of elements of the **same** type stored in **contiguous** memory location.
+* Data type: char, int, string, pair.
+* Global arrays are declared with 0.
+* Max array size is `10^6`
+* Index starts at 0 to n-1 where n is size of array.
+* Array is stored at random memory address location. Then from there it will increase +1.
+* Arrays are **constant** size. Vectors are **dynamic**.
+
+## Declaring an Array
+To declare an array we use this format.
+```cpp
+int arr[10]; // setups an array with 10 integers.
+```
+All of the 10 values will be initialized with "garbage" values.
+To set the values of the array at initialization time you can use this format:
+```cpp
+int arr[10] = {1,2,3,4,5,6,7,8,9,10};
+```
+If you would like to make all of the elements start at 0 you can use this format:
+```cpp
+int arr[10] = {0}; //sets the first element to 0 then all rest will be 0.
+```
+Although you cannot use this technique for any value for all elements:
+```cpp
+int arr[10] = {1}; // this sets the first element to 1 then all rest will be 0.
+```
+This is because if you set the value of one of the elements then the compiler will not be able to use garbage values. instead it will set all of the unset values to 0. because array are continuous in memory.
+This issue will be solved when we get to vectors.
+## Accessing Array Elements
+To access an element of an array we can use the index each element is assigned to.
+Indexes start at 0 for Arrays and go to n-1.
+```cpp
+int arr[5] = {10, 20, 30, 40, 50};
+cout << arr[0]; //will output 10
+cout << arr[4]; //will output 50
+```
+To access all of the elements of an array we can use a for loop to list every index.
+```cpp
+for(int i =0; i<5; i++){
+	cout << arr[i] << " ";
+}
+//output will be 10 20 30 40 50
+```
+Since Arrays are stored in contiguous memory locations aka in order next to each other from the start. The memory will be something like this:
+Lets say the start of the array is at address 1000
+- `arr[0]` → Address `1000` (for example)
+- `arr[1]` → Address `1004`
+- `arr[2]` → Address `1008`
+- `arr[3]` → Address `1012`
+- `arr[4]` → Address `1016`
+Since integers take 4 bytes in most systems we can follow it in memory.
+
+## Modifying Array Values:
+To modify an array value we can first get the index to access it then change the value:
+```cpp
+arr[0] = 25; //this will make the value at index 0 to 25.
+```
+To delete a value from an array requires too much in-depth for this guide. But feel free to do your own research. I will be explaining how to do this with vectors.
+
+## Multidimensional Arrays
+A Multidimensional Array is an array of arrays. AKA matrix.
+In order to simplify this explanation think of an excel spread sheet will rows and columns.
+Declaring a 2D array:
+```cpp
+int arr[2][3]; //initalizes a matrix with 2 rows and 3 columns.
+// 0 0 0
+// 0 0 0
+```
+The first set of brackets is the rows. The second set of brackets is the columns.
+You can initialize the matrix with values also:
+```cpp
+int arr[2][3] = {
+	{1,2,3},
+	{4,5,6}
+}; //2D array with 2 rows and 3 columns.
+```
+To access elements of a matrix you can specify what row and what column:
+```cpp
+cout << arr[0][1]; // outputs 2
+cout << arr[0][0]; // outputs 1
+cout << arr[2][2]; // outputs 5
+```
+
+To access all elements using loops:
+```cpp
+for(int i = 0; i<2; i++)//loop for the rows.
+{
+	for(int j = 0; j<3;j++) //loop for the columns
+	{
+		cout << arr[i][j]; // this  will output every value in the matrix.
+	}
+	cout << endl; //go to next line when we finish each row.
+}
+```
+
+## Drawbacks of Arrays
+* Arrays are fixed size. Meaning we cannot add or remove after setting up.
+* Arrays can be access out of bounds. Meaning we have to know the end in order to loop through them.
+* Not many functions built in to use for arrays. Like the issues of initializing all to a certain value.
+
+This leads us to arrays bigger and better brother: The vector
+
+# What is an Vector?
+A vector is a dynamic array that has built in functions that allow easier use and manipulation of data. This is your bread and butter when it comes to anything regarding arrays and lists in C++.
+* **Data types**: containers, int, char, short, longs double. Also structs pointers. and  pairs, tuple.
+* **Vector of vector** is another way of declaring a matrix.
+
+To be able to use a vector you must include the header:
+```cpp
+#include <vector>
+```
+
+## Declaring a Vector:
+to declare a vector of a certain data type:
+```cpp
+vector<int> v; //vector of integers with name v.
+vector<float> f; //vector of floats with name f.
+vector<vector<int>> matrix; //vector of vectors with value int named matrix.
+```
+To declare a vector with size unknown or 0:
+```cpp
+vector<int> v;
+```
+If we know the size of the vector we want to create we can define it: 
+```cpp
+vector<int> v(5); //this declares a vector with 5 elements. all initialized at 0
+```
+To fix the issue of not being able to declare with specific values we can now use this:
+```cpp
+vector<int> v(5,10); // all 5 values will be declared with integer 10
+```
+We can still use the Array technique of initializing the values at declaration:
+```cpp
+vector<int> v = {1,2,3,4,5,6,7,8,9,10}; //vector of size 10 with those values.
+```
+
+If you would like to copy vector from another. aka making a duplicate you can just pass the vector in while declaring it:
+```cpp
+vector<int> v1(5,10); //vector v1 with 5 elements all set to 10.
+
+vector<int> v2(v1); //vector v2 with the same 5 elements all set to 10 like v1.
+```
+## Adding Elements
+To add elements to a  we can simply just use 
+```cpp
+v.push_back(10); //this will add the value 10 to the end of the vector.
+```
+We can also use emplace. 
+```cpp
+v.emplace_back(10); //this will add the value 10 to the end of the vector.
+```
+Generally just use `.push_back() ` when adding elements to a vector. There are a few differences but if you would like to go down that rabbit whole please research on your own. `.emplace_back()` is not used as much but is supposed to be faster. The main difference is how the function uses the objects constructor arguments.
+
+If you have a vector of pairs you can also use `.push_back()`. 
+```cpp
+vector<pair<int,int>> vpair; //create a vector of integer pairs.
+
+vpair.push_back({1,2}); //This will add the pair{1,2} to the vector.
+
+vpair.emplace_back(1,2); //this will add pair {1,2} to the vector. Notice we do not have to add the pair curly brace syntax. This is one of the key differences with emplace_back.
+```
+## Accessing Elements
+We can access elements of a vector the same way that we access elements in arrays:
+```cpp
+cout << v[0]; //this will output the 0th index value.
+```
+If you would like to get fancy and use the built in function:
+```cpp
+cout << v.at(0) // this will output the 0th index value. But nobody does this. very uncommon.
+```
+You can still access the elements like arrays even with for loops. try it yourself.
+# Vector  Iterators
+This is the most important part of this guide that you must understand. Please do not move forward until you understand and can use iterators as they will be used in many other data structures.
+## What is an Iterator
+An iterator is a pointer or "thing" that points to the memory address of a container, in this case a vector.
+
+We can use iterator to traverse the memory of any container. Then getting the value at any memory point. 
+
+### First we need to get the memory address for the iterator
+There are built in functions that return the beginning address and ending address of a vector:
+```cpp
+v.begin(); //this returns the memory address of the beginning of the vector v
+v.end(); //this returns the memory address of the end of the vector v.
+
+//* note that .end() will not be pointing at the last element, but one after it.
+```
+Please memorize these two functions as they are used a lot.
+Now that we have the two memory addresses we can get their value using a pointer.
+
+### Quick recap of pointers
+```cpp
+vector<int> v = {1, 2, 3, 4, 5};
+
+int start = *v.begin(); // this will return the value at memory location v.begin()
+
+cout << start; //this will output 1
+```
+## Value *
+When you see the star or asterisk symbol think **value**! 
+The start is used to access the value that the pointer is pointing too in memory.
+
+Example of getting value of a pointer:
+```cpp
+int x = 10;
+int* ptr = &x; // ptr points to x's memory location
+cout << *ptr;  // Dereferences ptr, prints the value of x (10)
+```
+## Reference &
+When you see the and  symbol think **memory**!
+There are many cases where you pass a vector by reference in a function.
+Example:
+```cpp
+vector<int> twoSum(vector<int>& nums, int target) {
+	//notice the & nums.
+	//the vector nums is being referenced.
+	//we are not using a duplicate, but the original nums vector in the function.
+}
+```
+Now that we understand pointers and memory we can now upgrade to iterators.
+### Declaring an Iterator
+The textbook way of setting up an iterator can be done:
+```cpp
+vector<int>::iterator it = v.begin(); //we create a iterator named it and make it start at v.begin();
+```
+We use iterators to traverse the vectors. Here is an example loop to go through all values of vector:
+```cpp
+for(vector<int>::iterator it = v.begin(); it!= v.end(); it++){
+	cout << *(it) << " ";
+}
+```
+This is very confusing and has a lot of extra information. Let's shorten this:
+```cpp
+for(auto it = v.begin(); it!=v.end(); it++){
+	cout << *(it) << " ";
+}
+```
+Notice how we used the word '**auto**'. This will automatically determine what is the datatype we are iterating over. This is a very default way of traversing over a vector using iterator.
+
+Now the **most common way** of iterating over some vector or container is the for each loop:
+```cpp
+for(auto it: v){
+	cout << it << " "; //this will output the value of each index of v.
+}
+```
+This is the most common and easiest way to traverse over a vector and get the values. The auto keyword will be whatever the data type is in the container. So for example if they are all integers then the it will print the integers in the vector v.
+# Vector Deletion
+In order to delete an element in a vector you have to use the `.erase()` function:
+```cpp
+vector<int> v = {1,2,3,4,5};
+v.erase(v.begin()); //this will erase the element at index 0
+//{2,3,4,5}
+```
+Notice how we have to use the iterator `.begin()` in order to get the index we want. We are not able to use `v.erase(0)`. This is because we must use iterators with these functions.
+
+If you would like to specify a particular index you can start from `.begin()`:
+```cpp
+vector<int> v = {1,2,3,4,5};
+v.erase(v.begin()+2); //this will erase the element at index 2;
+//{1,2,4,5}
+```
+
+If you would like to delete a group of elements you just need to specify the `.erase(start,end)` Note we start from index 0.
+```cpp
+vector<int> v = {1,2,3,4,5};
+v.erase(v.begin() + 1, v.begin() + 4); // Erases elements from index 1 to 3 (2, 3, 4)
+//{1,5}
+```
+# Vector Insertion
+In order to insert values into the vector at specific index locations you can use the `.insert()` function.
+```cpp
+vector<int> v = {1,2,3,4,5};
+v.insert(v.begin(), 11); //inserts 11 at the .begin() location. aka index 0
+//v = {11,1,2,3,4,5}
+```
+
+To insert more than one value inside a specific index location: specify the `(start,count,value);`
+```cpp
+vector<int> v = {1,2,3,4,5};
+v.insert(v.begin()+1, 4, 11); //insert (index 1, 4 counts, of value 11);
+//{1,11,11,11,11,2,3,4,5}
+```
+Inserting another vector inside of a vector:
+```cpp
+vector<int> v2 = {7,7,7};
+vector<int> v = {1,2,3,4,5};
+//we want to insert v2 inside of v: starting after the 2
+v.insert(v.begin()+2, v2.begin(),v2.end());
+//v1 = {1,2,7,7,7,3,4,5}
+```
+Now you see how important understanding iterators are!
+
+# Most Used Vector Functions
+The most important functions are the ones that are used almost every time you are working with vectors. Please remember and fully understand these as skipping over will leave knowledge gaps making you go back over and over to understand this.
+### `.size()`
+```cpp
+vector<int> v = {1,2,3,4,5};
+cout << v.size(); // will give the size of the vector, starting from 1
+//outputs 5
+```
+### `.empty()`
+```cpp
+vector<int> v = {1,2,3,4,5};
+cout << v.empty(); //will return if the vector is empty or not.
+//outputs false;
+```
+### `.pop_back()`
+```cpp
+vector<int> v = {1,2,3,4,5};
+v.pop_back(); // will remove the last element
+// v = {1,2,3,4,}
+
+//if you would like to remove the first element use v.erase(v.begin())
+```
+### `.end()`
+This function is used with other containers such as `unordered_map`. Most time functions will return .end() = true if something was not found or nothing was returned.
+```cpp
+vector<int> v = {1,2,3,4,5};
+//we can use v.end() to locate the end of the vector.
+for (auto it = v.begin(); it != v.end(); ++it) { 
+cout << *it << " "; // Output: 1 2 3 4 5 
+}
+```
+# Vector in Action:
+Here is the problem 2sum from [Leetcode](https://leetcode.com/problems/two-sum/).
+```cpp
+vector<int> twoSum(vector<int>& nums, int target) {
+	vector<int> v; //answer vector
+	int n = nums.size(); //get the size of the vector
+	
+	for(int i = 0; i<n; i++){
+		for(int j = 1; j<n; j++){
+			if(nums[i] + nums[j] == target){
+				v.push_back(i); //add element 1
+				v.push_back(j); //add element 2
+				return v;
+			}
+		}
+	}
+	retrurn v; //return the empty vector if nothing.
+}
+```
+We used the brute force solution to solve this problem using vectors. Notice how the nums vector is passed by reference using the &. This means we are accessing the original nums vector. We use `.size()` to get the size of the vector in order to use it in the loop. We then add the two elements for the answer using `.push_back()`
+
+# Whats Next?
+Practice these problems in order to get familiar with vectors and arrays for interview questions. If you are more development focused please build some applications! This will help you internalize this information.
+
+Keep on the look out for the next guide on `Vector Algorithms: Unlocking the Power of C++ STL`.
+
+I will be going over most used algorithms and manipulation for vectors such as subsets, sorting, searching.
+
+Thank you for watching/reading!
+
+## Example Problems:
+### Easy
+1. [**Problem 34: Find First and Last Position of Element in Sorted Array**](https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/description/)
+2. [**Problem 35: Search Insert Position**](https://leetcode.com/problems/search-insert-position/description/)
+3. [**Problem 53: Maximum Subarray**](https://leetcode.com/problems/maximum-subarray/description/)
+4. [**Problem 66: Plus One**](https://leetcode.com/problems/plus-one/description/)
+5. [**Problem 88: Merge Sorted Array**](https://leetcode.com/problems/merge-sorted-array/description/)
+
+### Medium
+6. [**Problem 15: 3Sum**](https://leetcode.com/problems/3sum/)
+7. [**Problem 34: Find First and Last Position of Element in Sorted Array**](https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/description/)
+8. [**Problem 41: First Missing Positive**](https://leetcode.com/problems/first-missing-positive/)
+9. [**Problem 49: Group Anagrams**](https://leetcode.com/problems/group-anagrams/)
+
+### Hard
+10. [**Problem 42: Trapping Rain Water**](https://leetcode.com/problems/trapping-rain-water/)
+11. [**Problem 54: Spiral Matrix**](https://leetcode.com/problems/spiral-matrix/)
+12. [**Problem 62: Unique Paths**](https://leetcode.com/problems/unique-paths/)
+13. [**Problem 75: Sort Colors**](https://leetcode.com/problems/sort-colors/)
+14. [**Problem 84: Largest Rectangle in Histogram**](https://leetcode.com/problems/largest-rectangle-in-histogram/)
+
+### Additional Practice
+15. [**Problem 119: Pascal's Triangle II**](https://leetcode.com/problems/pascals-triangle-ii/)
+16. [**Problem 120: Triangle**](https://leetcode.com/problems/triangle/)
+17. [**Problem 238: Product of Array Except Self**](https://leetcode.com/problems/product-of-array-except-self/)
+18. [**Problem 300: Longest Increasing Subsequence**](https://leetcode.com/problems/longest-increasing-subsequence/)
+19. [**Problem 905: Sort Array By Parity**](https://leetcode.com/problems/sort-array-by-parity/)
+
+

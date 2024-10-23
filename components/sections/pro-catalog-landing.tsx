@@ -115,6 +115,7 @@ export default function ProCatalogLanding() {
       </header>
 
       <main className="container mx-auto px-4 pb-20">
+        {/* 
         <section className="py-16">
           <div className="container mx-auto">
             <Card className="p-6 md:p-8">
@@ -157,6 +158,7 @@ export default function ProCatalogLanding() {
             </Card>
           </div>
         </section>
+        */}
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {products.map((product) => (
             <Card key={product.id} className="flex flex-col overflow-hidden">
