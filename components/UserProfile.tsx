@@ -77,7 +77,7 @@ export default function UserProfile() {
   const handleClick = async () => {
     try {
       if (!user) {
-        throw 'Please log in to manage your billing.';
+        throw 'Please log in to manage your subscription .';
       }
 
       const { data: customer, error: fetchError } = await supabase
@@ -91,7 +91,7 @@ export default function UserProfile() {
 
     } catch (error) {
       console.error(error);
-      toast.error('Failed to create billing portal session:');
+      toast.error('Failed to create billing portal session: No Subscription to manage');
     }
   };
 
@@ -168,7 +168,7 @@ export default function UserProfile() {
   
   <div className="mt-4">
     <Button onClick={handleClick} variant="outline" size="lg" className="w-full">
-      <CreditCard className="mr-2 h-4 w-4" /> Manage Billing
+      <CreditCard className="mr-2 h-4 w-4" /> Manage Subscription
     </Button>
   </div>
 </CardContent>

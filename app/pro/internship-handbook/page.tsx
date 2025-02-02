@@ -99,6 +99,7 @@ export default function InternshipHandbookLanding() {
                     Pre Purchase Handbook $30
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
+                  {/*
                   <p className='text-3xl text-center pb-4'>or</p>
                   <Link href="/pro" passHref>
                     <Button size="lg" variant="outline" className="w-full">
@@ -106,6 +107,7 @@ export default function InternshipHandbookLanding() {
                       <ArrowRight className="ml-2 h-5 w-5" />
                     </Button>
                   </Link>
+                  */}
                 </>
               )}
             </div>
@@ -133,12 +135,14 @@ export default function InternshipHandbookLanding() {
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
               </Link>
+                 {/*
               <Link href="/pro" passHref>
                 <Button size="lg" variant="outline">
                   Get Pro Access
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
+              */}
             </div>
           )}
         </section>
