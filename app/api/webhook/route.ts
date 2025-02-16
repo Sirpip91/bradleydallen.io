@@ -55,7 +55,7 @@ export async function POST(request: NextRequest) {
                         .from('one_time_payments')
                         .select('purchased_products, purchase_dates, prices')
                         .eq('user_id', session.metadata?.user_id)
-                        .single();
+                        .maybeSingle();
 
                     if (fetchError) {
                         console.error('Error fetching existing payment:', fetchError);
