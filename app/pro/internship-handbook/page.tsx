@@ -40,14 +40,14 @@ export default function InternshipHandbookLanding() {
     const session = await response.json();
     await stripe?.redirectToCheckout({ sessionId: session.id });
   };
-
   const benefits = [
-    "Comprehensive guide to landing your dream internship",
-    "Expert tips on resume building and interview preparation",
-    "Insider knowledge on navigating the internship process",
-    "Strategies for networking and building professional relationships",
-    "PDF Download and Full Access on Content page"
+    "Comprehensive guide to landing your dream internship or full-time position",
+    "Expert tips on personal branding, resume building, and interview preparation",
+    "Insider knowledge on navigating the job and internship process",
+    "Proven strategies for networking, attending events, and building professional relationships",
+    "Free PDF Download and Full Access to all Course Content"
   ];
+  
 
   if (loading) {
     return <div className="text-center">Loading...</div>; // Show loading state
@@ -57,10 +57,10 @@ export default function InternshipHandbookLanding() {
     <div className="min-h-screen bg-background">
       <header className="pt-20 pb-16 text-center">
         <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
-          Internship Mastery Handbook
+          Career Mastery Handbook
         </h1>
         <p className="mt-4 text-xl text-muted-foreground max-w-2xl mx-auto">
-          Unlock your potential with this comprehensive internship guide!
+          Unlock your potential with this comprehensive career guide!
         </p>
       </header>
 
@@ -69,7 +69,7 @@ export default function InternshipHandbookLanding() {
           <div>
             <Image
               src={handbook}
-              alt="Internship Mastery Handbook Cover"
+              alt="Career Mastery Handbook Cover"
               width={400}
               height={400}
               className="rounded-lg shadow-lg"
@@ -115,10 +115,10 @@ export default function InternshipHandbookLanding() {
         </div>
 
         <section className="mt-20 text-center">
-          <h2 className="text-3xl font-bold mb-4">Ready to Supercharge Your Internship Journey?</h2>
+          <h2 className="text-3xl font-bold mb-4">Ready to Supercharge Your Career Journey?</h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto">
-            Don&apos;t miss out on the opportunity to gain a competitive edge in your internship search.
-            Get your copy of the Internship Mastery Handbook today!
+            Don&apos;t miss out on the opportunity to gain a competitive edge in your job search.
+            Get your copy of the Career Mastery Handbook today!
           </p>
           {hasAccess ? (
             <Link href="/tags/internship-handbook" passHref>

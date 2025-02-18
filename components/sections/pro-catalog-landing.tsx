@@ -35,8 +35,8 @@ const products = [
   },
   {
     id: 2,
-    title: "Internship Mastery Handbook",
-    description: "Unlock your potential with this comprehensive internship guide!",
+    title: "Career Mastery Handbook",
+    description: "Unlock your potential with this comprehensive career guide!",
     type: "TBA",
     icon: <FileText className="h-6 w-6" />,
     href: "pro/internship-handbook",
