@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mastering Arrays &amp; Vectors Programming (C++) STL | Bradleydallen.io</title>
+    <script defer src="../../js/script.js"></script>
+<script>
+  const initialTheme = localStorage.getItem('theme') || 'light';
+  document.documentElement.setAttribute('data-theme', initialTheme);
+</script>
+    <link rel="stylesheet" href= "../../css/blog.css">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+    <header>
+        <h1>Mastering Arrays &amp; Vectors Programming (C++) STL</h1>
+    <nav class="site-nav">
+      <a href="../../index.html">Home</a> | 
+      <a href="../index.html">Library</a> |  
+      <a href="https://bradleydallen.gumroad.com/" target="_blank">Courses</a> | 
+      <button id="theme-toggle">Dark</button>
+    </nav>
+        <hr>
+    </header>
+
+    <main>
+
+      <article>
+
+<h1 id="video-guide">Video Guide</h1>
+  <a href="https://www.youtube.com/watch?v=bqyBlrS7P_4" target="_blank" rel="noopener noreferrer">
+  Link: <strong>Mastering Arrays & Vectors: Essential Skills for Problem Solving in Programming (C++) STL</strong>
+  </a>
+
+<h1 id="what-is-array-">What is Array?</h1>
+<p>Array is collection of elements of the <strong>same</strong> type stored in <strong>contiguous</strong> memory location.</p>
+<ul>
+<li>Data type: char, int, string, pair.</li>
+<li>Global arrays are declared with 0.</li>
+<li>Max array size is <code>10^6</code></li>
+<li>Index starts at 0 to n-1 where n is size of array.</li>
+<li>Array is stored at random memory address location. Then from there it will increase +1.</li>
+<li>Arrays are <strong>constant</strong> size. Vectors are <strong>dynamic</strong>.</li>
+</ul>
+<h2 id="declaring-an-array">Declaring an Array</h2>
+<p>To declare an array we use this format.</p>
+<pre><code class="lang-cpp">int arr[10]; // setups an<span class="hljs-built_in"> array </span>with 10 integers.
+</code></pre>
+<p>All of the 10 values will be initialized with &quot;garbage&quot; values.
+To set the values of the array at initialization time you can use this format:</p>
+<pre><code class="lang-cpp">int arr[<span class="hljs-number">10</span>] = {<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">7</span>,<span class="hljs-number">8</span>,<span class="hljs-number">9</span>,<span class="hljs-number">10</span>};
+</code></pre>
+<p>If you would like to make all of the elements start at 0 you can use this format:</p>
+<pre><code class="lang-cpp">int arr[<span class="hljs-number">10</span>] = {<span class="hljs-number">0</span>}; <span class="hljs-comment">//sets the first element to 0 then all rest will be 0.</span>
+</code></pre>
+<p>Although you cannot use this technique for any value for all elements:</p>
+<pre><code class="lang-cpp">int arr[<span class="hljs-number">10</span>] = {<span class="hljs-number">1</span>}; <span class="hljs-comment">// this sets the first element to 1 then all rest will be 0.</span>
+</code></pre>
+<p>This is because if you set the value of one of the elements then the compiler will not be able to use garbage values. instead it will set all of the unset values to 0. because array are continuous in memory.
+This issue will be solved when we get to vectors.</p>
+<h2 id="accessing-array-elements">Accessing Array Elements</h2>
+<p>To access an element of an array we can use the index each element is assigned to.
+Indexes start at 0 for Arrays and go to n-1.</p>
+<pre><code class="lang-cpp">int arr[<span class="hljs-number">5</span>] = {<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <span class="hljs-number">30</span>, <span class="hljs-number">40</span>, <span class="hljs-number">50</span>};
+cout &lt;&lt; arr[<span class="hljs-number">0</span>]; <span class="hljs-comment">//will output 10</span>
+cout &lt;&lt; arr[<span class="hljs-number">4</span>]; <span class="hljs-comment">//will output 50</span>
+</code></pre>
+<p>To access all of the elements of an array we can use a for loop to list every index.</p>
+<pre><code class="lang-cpp"><span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i =<span class="hljs-number">0</span>; i&lt;<span class="hljs-number">5</span>; i++){
+    <span class="hljs-built_in">cout</span> &lt;&lt; arr[i] &lt;&lt; <span class="hljs-string">" "</span>;
+}
+<span class="hljs-comment">//output will be 10 20 30 40 50</span>
+</code></pre>
+<p>Since Arrays are stored in contiguous memory locations aka in order next to each other from the start. The memory will be something like this:
+Lets say the start of the array is at address 1000</p>
+<ul>
+<li><code>arr[0]</code> → Address <code>1000</code> (for example)</li>
+<li><code>arr[1]</code> → Address <code>1004</code></li>
+<li><code>arr[2]</code> → Address <code>1008</code></li>
+<li><code>arr[3]</code> → Address <code>1012</code></li>
+<li><code>arr[4]</code> → Address <code>1016</code>
+Since integers take 4 bytes in most systems we can follow it in memory.</li>
+</ul>
+<h2 id="modifying-array-values-">Modifying Array Values:</h2>
+<p>To modify an array value we can first get the index to access it then change the value:</p>
+<pre><code class="lang-cpp">arr[<span class="hljs-number">0</span>] = <span class="hljs-number">25</span>; <span class="hljs-comment">//this will make the value at index 0 to 25.</span>
+</code></pre>
+<p>To delete a value from an array requires too much in-depth for this guide. But feel free to do your own research. I will be explaining how to do this with vectors.</p>
+<h2 id="multidimensional-arrays">Multidimensional Arrays</h2>
+<p>A Multidimensional Array is an array of arrays. AKA matrix.
+In order to simplify this explanation think of an excel spread sheet will rows and columns.
+Declaring a 2D array:</p>
+<pre><code class="lang-cpp">int arr[<span class="hljs-string">2</span>][<span class="hljs-symbol">3</span>]; //initalizes a matrix with 2 rows and 3 columns.
+// 0 0 0
+// 0 0 0
+</code></pre>
+<p>The first set of brackets is the rows. The second set of brackets is the columns.
+You can initialize the matrix with values also:</p>
+<pre><code class="lang-cpp">int arr[<span class="hljs-string">2</span>][<span class="hljs-symbol">3</span>] = {
+<span class="hljs-code">    {1,2,3},</span>
+<span class="hljs-code">    {4,5,6}</span>
+}; //2D array with 2 rows and 3 columns.
+</code></pre>
+<p>To access elements of a matrix you can specify what row and what column:</p>
+<pre><code class="lang-cpp">cout &lt;&lt; arr[<span class="hljs-number">0</span>][<span class="hljs-number">1</span>]; <span class="hljs-comment">// outputs 2</span>
+cout &lt;&lt; arr[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]; <span class="hljs-comment">// outputs 1</span>
+cout &lt;&lt; arr[<span class="hljs-number">2</span>][<span class="hljs-number">2</span>]; <span class="hljs-comment">// outputs 5</span>
+</code></pre>
+<p>To access all elements using loops:</p>
+<pre><code class="lang-cpp"><span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i&lt;<span class="hljs-number">2</span>; i++)<span class="hljs-comment">//loop for the rows.</span>
+{
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j&lt;<span class="hljs-number">3</span>;j++) <span class="hljs-comment">//loop for the columns</span>
+    {
+        <span class="hljs-built_in">cout</span> &lt;&lt; arr[i][j]; <span class="hljs-comment">// this  will output every value in the matrix.</span>
+    }
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-comment">//go to next line when we finish each row.</span>
+}
+</code></pre>
+<h2 id="drawbacks-of-arrays">Drawbacks of Arrays</h2>
+<ul>
+<li>Arrays are fixed size. Meaning we cannot add or remove after setting up.</li>
+<li>Arrays can be access out of bounds. Meaning we have to know the end in order to loop through them.</li>
+<li>Not many functions built in to use for arrays. Like the issues of initializing all to a certain value.</li>
+</ul>
+<p>This leads us to arrays bigger and better brother: The vector</p>
+<h1 id="what-is-an-vector-">What is an Vector?</h1>
+<p>A vector is a dynamic array that has built in functions that allow easier use and manipulation of data. This is your bread and butter when it comes to anything regarding arrays and lists in C++.</p>
+<ul>
+<li><strong>Data types</strong>: containers, int, char, short, longs double. Also structs pointers. and  pairs, tuple.</li>
+<li><strong>Vector of vector</strong> is another way of declaring a matrix.</li>
+</ul>
+<p>To be able to use a vector you must include the header:</p>
+<pre><code class="lang-cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span>
+</code></pre>
+<h2 id="declaring-a-vector-">Declaring a Vector:</h2>
+<p>to declare a vector of a certain data type:</p>
+<pre><code class="lang-cpp"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; v; <span class="hljs-comment">//vector of integers with name v.</span>
+<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">float</span>&gt; f; <span class="hljs-comment">//vector of floats with name f.</span>
+<span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&gt; matrix; <span class="hljs-comment">//vector of vectors with value int named matrix.</span>
+</code></pre>
+<p>To declare a vector with size unknown or 0:</p>
+<pre><code class="lang-cpp"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; v;
+</code></pre>
+<p>If we know the size of the vector we want to create we can define it: </p>
+<pre><code class="lang-cpp"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; v(<span class="hljs-number">5</span>); <span class="hljs-comment">//this declares a vector with 5 elements. all initialized at 0</span>
+</code></pre>
+<p>To fix the issue of not being able to declare with specific values we can now use this:</p>
+<pre><code class="lang-cpp"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; v(<span class="hljs-number">5</span>,<span class="hljs-number">10</span>); <span class="hljs-comment">// all 5 values will be declared with integer 10</span>
+</code></pre>
+<p>We can still use the Array technique of initializing the values at declaration:</p>
+<pre><code class="lang-cpp"><span class="hljs-type">vector</span>&lt;int&gt; v = {<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">7</span>,<span class="hljs-number">8</span>,<span class="hljs-number">9</span>,<span class="hljs-number">10</span>}; <span class="hljs-comment">//vector of size 10 with those values.</span>
+</code></pre>
+<p>If you would like to copy vector from another. aka making a duplicate you can just pass the vector in while declaring it:</p>
+<pre><code class="lang-cpp"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; v1(<span class="hljs-number">5</span>,<span class="hljs-number">10</span>); <span class="hljs-comment">//vector v1 with 5 elements all set to 10.</span>
+
+<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; v2(v1); <span class="hljs-comment">//vector v2 with the same 5 elements all set to 10 like v1.</span>
+</code></pre>
+<h2 id="adding-elements">Adding Elements</h2>
+<p>To add elements to a  we can simply just use </p>
+<pre><code class="lang-cpp">v.push_back<span class="hljs-comment">(10)</span>; <span class="hljs-comment">//this will add the value 10 to the end of the vector.</span>
+</code></pre>
+<p>We can also use emplace. </p>
+<pre><code class="lang-cpp">v.emplace_back<span class="hljs-comment">(10)</span>; <span class="hljs-comment">//this will add the value 10 to the end of the vector.</span>
+</code></pre>
+<p>Generally just use <code>.push_back()</code> when adding elements to a vector. There are a few differences but if you would like to go down that rabbit whole please research on your own. <code>.emplace_back()</code> is not used as much but is supposed to be faster. The main difference is how the function uses the objects constructor arguments.</p>
+<p>If you have a vector of pairs you can also use <code>.push_back()</code>. </p>
+<pre><code class="lang-cpp"><span class="hljs-type">vector</span>&lt;pair&lt;int,int&gt;&gt; vpair; <span class="hljs-comment">//create a vector of integer pairs.</span>
+
+vpair.push_back({<span class="hljs-number">1</span>,<span class="hljs-number">2</span>}); <span class="hljs-comment">//This will add the pair{1,2} to the vector.</span>
+
+vpair.emplace_back(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>); <span class="hljs-comment">//this will add pair {1,2} to the vector. Notice we do not have to add the pair curly brace syntax. This is one of the key differences with emplace_back.</span>
+</code></pre>
+<h2 id="accessing-elements">Accessing Elements</h2>
+<p>We can access elements of a vector the same way that we access elements in arrays:</p>
+<pre><code class="lang-cpp"><span class="hljs-built_in">cout</span> &lt;&lt; v[<span class="hljs-number">0</span>]; <span class="hljs-comment">//this will output the 0th index value.</span>
+</code></pre>
+<p>If you would like to get fancy and use the built in function:</p>
+<pre><code class="lang-cpp"><span class="hljs-built_in">cout</span> &lt;&lt; v.at(<span class="hljs-number">0</span>) <span class="hljs-comment">// this will output the 0th index value. But nobody does this. very uncommon.</span>
+</code></pre>
+<p>You can still access the elements like arrays even with for loops. try it yourself.</p>
+<h1 id="vector-iterators">Vector  Iterators</h1>
+<p>This is the most important part of this guide that you must understand. Please do not move forward until you understand and can use iterators as they will be used in many other data structures.</p>
+<h2 id="what-is-an-iterator">What is an Iterator</h2>
+<p>An iterator is a pointer or &quot;thing&quot; that points to the memory address of a container, in this case a vector.</p>
+<p>We can use iterator to traverse the memory of any container. Then getting the value at any memory point. </p>
+<h3 id="first-we-need-to-get-the-memory-address-for-the-iterator">First we need to get the memory address for the iterator</h3>
+<p>There are built in functions that return the beginning address and ending address of a vector:</p>
+<pre><code class="lang-cpp">v.<span class="hljs-built_in">begin</span>(); <span class="hljs-comment">//this returns the memory address of the beginning of the vector v</span>
+v.<span class="hljs-built_in">end</span>(); <span class="hljs-comment">//this returns the memory address of the end of the vector v.</span>
+
+<span class="hljs-comment">//* note that .end() will not be pointing at the last element, but one after it.</span>
+</code></pre>
+<p>Please memorize these two functions as they are used a lot.
+Now that we have the two memory addresses we can get their value using a pointer.</p>
+<h3 id="quick-recap-of-pointers">Quick recap of pointers</h3>
+<pre><code class="lang-cpp"><span class="hljs-type">vector</span>&lt;int&gt; v = {<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>};
+
+int start = *v.begin(); <span class="hljs-comment">// this will return the value at memory location v.begin()</span>
+
+cout &lt;&lt; start; <span class="hljs-comment">//this will output 1</span>
+</code></pre>
+<h2 id="value-">Value *</h2>
+<p>When you see the star or asterisk symbol think <strong>value</strong>! 
+The start is used to access the value that the pointer is pointing too in memory.</p>
+<p>Example of getting value of a pointer:</p>
+<pre><code class="lang-cpp"><span class="hljs-built_in">int</span> x = <span class="hljs-number">10</span>;
+<span class="hljs-built_in">int</span>* <span class="hljs-keyword">ptr</span> = &amp;x; // <span class="hljs-keyword">ptr</span> points to x's memory location
+cout &lt;&lt; *<span class="hljs-keyword">ptr</span>;  // <span class="hljs-type">Dereferences</span> <span class="hljs-keyword">ptr</span>, prints the value <span class="hljs-keyword">of</span> x (<span class="hljs-number">10</span>)
+</code></pre>
+<h2 id="reference-">Reference &amp;</h2>
+<p>When you see the and  symbol think <strong>memory</strong>!
+There are many cases where you pass a vector by reference in a function.
+Example:</p>
+<pre><code class="lang-cpp"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; twoSum(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums, <span class="hljs-keyword">int</span> target) {
+    <span class="hljs-comment">//notice the &amp; nums.</span>
+    <span class="hljs-comment">//the vector nums is being referenced.</span>
+    <span class="hljs-comment">//we are not using a duplicate, but the original nums vector in the function.</span>
+}
+</code></pre>
+<p>Now that we understand pointers and memory we can now upgrade to iterators.</p>
+<h3 id="declaring-an-iterator">Declaring an Iterator</h3>
+<p>The textbook way of setting up an iterator can be done:</p>
+<pre><code class="lang-cpp"><span class="hljs-symbol">vector</span>&lt;int&gt;::<span class="hljs-keyword">iterator </span><span class="hljs-keyword">it </span>= v.<span class="hljs-keyword">begin(); </span>//we create a <span class="hljs-keyword">iterator </span>named <span class="hljs-keyword">it </span><span class="hljs-keyword">and </span>make <span class="hljs-keyword">it </span>start at v.<span class="hljs-keyword">begin();</span>
+</code></pre>
+<p>We use iterators to traverse the vectors. Here is an example loop to go through all values of vector:</p>
+<pre><code class="lang-cpp"><span class="hljs-keyword">for</span>(vector&lt;int&gt;::iterator <span class="hljs-keyword">it</span> = v.begin(); <span class="hljs-keyword">it</span>!= v.<span class="hljs-keyword">end</span>(); <span class="hljs-keyword">it</span>++){
+    cout &lt;&lt; *(<span class="hljs-keyword">it</span>) &lt;&lt; <span class="hljs-string">" "</span>;
+}
+</code></pre>
+<p>This is very confusing and has a lot of extra information. Let&#39;s shorten this:</p>
+<pre><code class="lang-cpp"><span class="hljs-keyword">for</span>(auto <span class="hljs-keyword">it</span> = v.begin(); <span class="hljs-keyword">it</span>!=v.<span class="hljs-keyword">end</span>(); <span class="hljs-keyword">it</span>++){
+    cout &lt;&lt; *(<span class="hljs-keyword">it</span>) &lt;&lt; <span class="hljs-string">" "</span>;
+}
+</code></pre>
+<p>Notice how we used the word &#39;<strong>auto</strong>&#39;. This will automatically determine what is the datatype we are iterating over. This is a very default way of traversing over a vector using iterator.</p>
+<p>Now the <strong>most common way</strong> of iterating over some vector or container is the for each loop:</p>
+<pre><code class="lang-cpp"><span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> it: v){
+    <span class="hljs-built_in">cout</span> &lt;&lt; it &lt;&lt; <span class="hljs-string">" "</span>; <span class="hljs-comment">//this will output the value of each index of v.</span>
+}
+</code></pre>
+<p>This is the most common and easiest way to traverse over a vector and get the values. The auto keyword will be whatever the data type is in the container. So for example if they are all integers then the it will print the integers in the vector v.</p>
+<h1 id="vector-deletion">Vector Deletion</h1>
+<p>In order to delete an element in a vector you have to use the <code>.erase()</code> function:</p>
+<pre><code class="lang-cpp"><span class="hljs-type">vector</span>&lt;int&gt; v = {<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>};
+v.erase(v.begin()); <span class="hljs-comment">//this will erase the element at index 0</span>
+<span class="hljs-comment">//{2,3,4,5}</span>
+</code></pre>
+<p>Notice how we have to use the iterator <code>.begin()</code> in order to get the index we want. We are not able to use <code>v.erase(0)</code>. This is because we must use iterators with these functions.</p>
+<p>If you would like to specify a particular index you can start from <code>.begin()</code>:</p>
+<pre><code class="lang-cpp"><span class="hljs-type">vector</span>&lt;int&gt; v = {<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>};
+v.erase(v.begin()+<span class="hljs-number">2</span>); <span class="hljs-comment">//this will erase the element at index 2;</span>
+<span class="hljs-comment">//{1,2,4,5}</span>
+</code></pre>
+<p>If you would like to delete a group of elements you just need to specify the <code>.erase(start,end)</code> Note we start from index 0.</p>
+<pre><code class="lang-cpp"><span class="hljs-type">vector</span>&lt;int&gt; v = {<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>};
+v.erase(v.begin() + <span class="hljs-number">1</span>, v.begin() + <span class="hljs-number">4</span>); <span class="hljs-comment">// Erases elements from index 1 to 3 (2, 3, 4)</span>
+<span class="hljs-comment">//{1,5}</span>
+</code></pre>
+<h1 id="vector-insertion">Vector Insertion</h1>
+<p>In order to insert values into the vector at specific index locations you can use the <code>.insert()</code> function.</p>
+<pre><code class="lang-cpp"><span class="hljs-type">vector</span>&lt;int&gt; v = {<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>};
+v.insert(v.begin(), <span class="hljs-number">11</span>); <span class="hljs-comment">//inserts 11 at the .begin() location. aka index 0</span>
+<span class="hljs-comment">//v = {11,1,2,3,4,5}</span>
+</code></pre>
+<p>To insert more than one value inside a specific index location: specify the <code>(start,count,value);</code></p>
+<pre><code class="lang-cpp"><span class="hljs-type">vector</span>&lt;int&gt; v = {<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>};
+v.insert(v.begin()+<span class="hljs-number">1</span>, <span class="hljs-number">4</span>, <span class="hljs-number">11</span>); <span class="hljs-comment">//insert (index 1, 4 counts, of value 11);</span>
+<span class="hljs-comment">//{1,11,11,11,11,2,3,4,5}</span>
+</code></pre>
+<p>Inserting another vector inside of a vector:</p>
+<pre><code class="lang-cpp"><span class="hljs-type">vector</span>&lt;int&gt; v2 = {<span class="hljs-number">7</span>,<span class="hljs-number">7</span>,<span class="hljs-number">7</span>};
+<span class="hljs-type">vector</span>&lt;int&gt; v = {<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>};
+<span class="hljs-comment">//we want to insert v2 inside of v: starting after the 2</span>
+v.insert(v.begin()+<span class="hljs-number">2</span>, v2.begin(),v2.end());
+<span class="hljs-comment">//v1 = {1,2,7,7,7,3,4,5}</span>
+</code></pre>
+<p>Now you see how important understanding iterators are!</p>
+<h1 id="most-used-vector-functions">Most Used Vector Functions</h1>
+<p>The most important functions are the ones that are used almost every time you are working with vectors. Please remember and fully understand these as skipping over will leave knowledge gaps making you go back over and over to understand this.</p>
+<h3 id="-size-"><code>.size()</code></h3>
+<pre><code class="lang-cpp"><span class="hljs-type">vector</span>&lt;int&gt; v = {<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>};
+cout &lt;&lt; v.size(); <span class="hljs-comment">// will give the size of the vector, starting from 1</span>
+<span class="hljs-comment">//outputs 5</span>
+</code></pre>
+<h3 id="-empty-"><code>.empty()</code></h3>
+<pre><code class="lang-cpp"><span class="hljs-type">vector</span>&lt;int&gt; v = {<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>};
+cout &lt;&lt; v.empty(); <span class="hljs-comment">//will return if the vector is empty or not.</span>
+<span class="hljs-comment">//outputs false;</span>
+</code></pre>
+<h3 id="-pop_back-"><code>.pop_back()</code></h3>
+<pre><code class="lang-cpp"><span class="hljs-type">vector</span>&lt;int&gt; v = {<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>};
+v.pop_back(); <span class="hljs-comment">// will remove the last element</span>
+<span class="hljs-comment">// v = {1,2,3,4,}</span>
+
+<span class="hljs-comment">//if you would like to remove the first element use v.erase(v.begin())</span>
+</code></pre>
+<h3 id="-end-"><code>.end()</code></h3>
+<p>This function is used with other containers such as <code>unordered_map</code>. Most time functions will return .end() = true if something was not found or nothing was returned.</p>
+<pre><code class="lang-cpp"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; v = {<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>};
+<span class="hljs-comment">//we can use v.end() to locate the end of the vector.</span>
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> it = v.begin(); it != v.end(); ++it) { 
+<span class="hljs-built_in">cout</span> &lt;&lt; *it &lt;&lt; <span class="hljs-string">" "</span>; <span class="hljs-comment">// Output: 1 2 3 4 5 </span>
+}
+</code></pre>
+<h1 id="vector-in-action-">Vector in Action:</h1>
+<p>Here is the problem 2sum from <a href="https://leetcode.com/problems/two-sum/">Leetcode</a>.</p>
+<pre><code class="lang-cpp"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; twoSum(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums, <span class="hljs-keyword">int</span> target) {
+    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; v; <span class="hljs-comment">//answer vector</span>
+    <span class="hljs-keyword">int</span> n = nums.size(); <span class="hljs-comment">//get the size of the vector</span>
+
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i&lt;n; i++){
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = <span class="hljs-number">1</span>; j&lt;n; j++){
+            <span class="hljs-keyword">if</span>(nums[i] + nums[j] == target){
+                v.push_back(i); <span class="hljs-comment">//add element 1</span>
+                v.push_back(j); <span class="hljs-comment">//add element 2</span>
+                <span class="hljs-keyword">return</span> v;
+            }
+        }
+    }
+    retrurn v; <span class="hljs-comment">//return the empty vector if nothing.</span>
+}
+</code></pre>
+<p>We used the brute force solution to solve this problem using vectors. Notice how the nums vector is passed by reference using the &amp;. This means we are accessing the original nums vector. We use <code>.size()</code> to get the size of the vector in order to use it in the loop. We then add the two elements for the answer using <code>.push_back()</code></p>
+<h1 id="whats-next-">Whats Next?</h1>
+<p>Practice these problems in order to get familiar with vectors and arrays for interview questions. If you are more development focused please build some applications! This will help you internalize this information.</p>
+<p>Keep on the look out for the next guide on <code>Vector Algorithms: Unlocking the Power of C++ STL</code>.</p>
+<p>I will be going over most used algorithms and manipulation for vectors such as subsets, sorting, searching.</p>
+<p>Thank you for watching/reading!</p>
+<h2 id="example-problems-">Example Problems:</h2>
+
+<h3 id="easy">Easy</h3>
+<ol>
+  <li><a href="https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/description/" target="_blank" rel="noopener noreferrer"><strong>Problem 34: Find First and Last Position of Element in Sorted Array</strong></a></li>
+  <li><a href="https://leetcode.com/problems/search-insert-position/description/" target="_blank" rel="noopener noreferrer"><strong>Problem 35: Search Insert Position</strong></a></li>
+  <li><a href="https://leetcode.com/problems/maximum-subarray/description/" target="_blank" rel="noopener noreferrer"><strong>Problem 53: Maximum Subarray</strong></a></li>
+  <li><a href="https://leetcode.com/problems/plus-one/description/" target="_blank" rel="noopener noreferrer"><strong>Problem 66: Plus One</strong></a></li>
+  <li><a href="https://leetcode.com/problems/merge-sorted-array/description/" target="_blank" rel="noopener noreferrer"><strong>Problem 88: Merge Sorted Array</strong></a></li>
+</ol>
+
+<h3 id="medium">Medium</h3>
+<ol>
+  <li><a href="https://leetcode.com/problems/3sum/" target="_blank" rel="noopener noreferrer"><strong>Problem 15: 3Sum</strong></a></li>
+  <li><a href="https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/description/" target="_blank" rel="noopener noreferrer"><strong>Problem 34: Find First and Last Position of Element in Sorted Array</strong></a></li>
+  <li><a href="https://leetcode.com/problems/first-missing-positive/" target="_blank" rel="noopener noreferrer"><strong>Problem 41: First Missing Positive</strong></a></li>
+  <li><a href="https://leetcode.com/problems/group-anagrams/" target="_blank" rel="noopener noreferrer"><strong>Problem 49: Group Anagrams</strong></a></li>
+</ol>
+
+<h3 id="hard">Hard</h3>
+<ol>
+  <li><a href="https://leetcode.com/problems/trapping-rain-water/" target="_blank" rel="noopener noreferrer"><strong>Problem 42: Trapping Rain Water</strong></a></li>
+  <li><a href="https://leetcode.com/problems/spiral-matrix/" target="_blank" rel="noopener noreferrer"><strong>Problem 54: Spiral Matrix</strong></a></li>
+  <li><a href="https://leetcode.com/problems/unique-paths/" target="_blank" rel="noopener noreferrer"><strong>Problem 62: Unique Paths</strong></a></li>
+  <li><a href="https://leetcode.com/problems/sort-colors/" target="_blank" rel="noopener noreferrer"><strong>Problem 75: Sort Colors</strong></a></li>
+  <li><a href="https://leetcode.com/problems/largest-rectangle-in-histogram/" target="_blank" rel="noopener noreferrer"><strong>Problem 84: Largest Rectangle in Histogram</strong></a></li>
+</ol>
+
+<h3 id="additional-practice">Additional Practice</h3>
+<ol>
+  <li><a href="https://leetcode.com/problems/pascals-triangle-ii/" target="_blank" rel="noopener noreferrer"><strong>Problem 119: Pascal's Triangle II</strong></a></li>
+  <li><a href="https://leetcode.com/problems/triangle/" target="_blank" rel="noopener noreferrer"><strong>Problem 120: Triangle</strong></a></li>
+  <li><a href="https://leetcode.com/problems/product-of-array-except-self/" target="_blank" rel="noopener noreferrer"><strong>Problem 238: Product of Array Except Self</strong></a></li>
+  <li><a href="https://leetcode.com/problems/longest-increasing-subsequence/" target="_blank" rel="noopener noreferrer"><strong>Problem 300: Longest Increasing Subsequence</strong></a></li>
+  <li><a href="https://leetcode.com/problems/sort-array-by-parity/" target="_blank" rel="noopener noreferrer"><strong>Problem 905: Sort Array By Parity</strong></a></li>
+</ol>
+
+
+      </article>
+
+
+ </main>
+
+    <footer>
+      
+          <!-- YouTube SVG -->
+  <a href="https://www.youtube.com/channel/UCYtU31c9jw4g7tFzDt1MGLw" target="_blank" class="youtube">
+    <svg viewBox="0 0 24 24">
+      <path d="M19.615 3.184C18.79 2.936 12 2.936 12 2.936s-6.79 0-7.615.248C3.28 3.431 2.922 4.238 2.922 6.01v11.978c0 1.773.358 2.58 1.463 2.826C5.21 21.064 12 21.064 12 21.064s6.79 0 7.615-.25c1.105-.247 1.463-1.053 1.463-2.827V6.01c0-1.772-.358-2.58-1.463-2.826zM10 15.5v-7l6 3.5-6 3.5z"/>
+    </svg>
+  </a>
+
+  <!-- GitHub SVG -->
+  <a href="https://github.com/Sirpip91" target="_blank" class="github">
+    <svg viewBox="0 0 24 24">
+      <path d="M12 0C5.37 0 0 5.373 0 12c0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.334-1.756-1.334-1.756-1.09-.745.082-.73.082-.73 1.205.085 1.84 1.238 1.84 1.238 1.07 1.834 2.807 1.304 3.492.997.108-.775.42-1.305.763-1.605-2.665-.303-5.467-1.333-5.467-5.932 0-1.31.467-2.382 1.235-3.222-.123-.303-.536-1.523.117-3.176 0 0 1.008-.322 3.3 1.23a11.52 11.52 0 0 1 3-.403c1.02.005 2.045.138 3 .403 2.288-1.552 3.294-1.23 3.294-1.23.656 1.653.243 2.873.12 3.176.77.84 1.232 1.912 1.232 3.222 0 4.61-2.807 5.625-5.48 5.922.431.372.815 1.103.815 2.222v3.293c0 .32.216.694.825.576C20.565 21.796 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+    </svg>
+  </a>
+        <p>&copy; 2025 bradleydallen</p>
+    </footer>
+</body>
+
+</html>

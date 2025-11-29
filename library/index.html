@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mindsets | Bradleydallen.io</title>
+    <script defer src="../js/script.js"></script>
+<script>
+  const initialTheme = localStorage.getItem('theme') || 'light';
+  document.documentElement.setAttribute('data-theme', initialTheme);
+</script>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <h1>Library</h1>
+    <nav class="site-nav">
+      <a href="../index.html">Home</a> | 
+      <a href="index.html">Library</a> |  
+      <a href="https://bradleydallen.gumroad.com/" target="_blank">Courses</a> | 
+      <button id="theme-toggle">Dark</button>
+    </nav>
+        <hr>
+    </header>
+
+<main>
+  <section class="intro">
+    <h1>Welcome to my Knowledge Archive</h1>
+    <p>A growing collection of thoughts, lessons, and insights — organized for clarity and reflection.</p>
+  </section>
+
+  <section class="sections">
+    <div class="section-grid">
+      <a href="mindsets/" class="section-card">
+        <h3>🧠 Mindsets</h3>
+        <p>Philosophies, mental models, and ways of thinking that guide growth.</p>
+      </a>
+      <a href="engineering/" class="section-card">
+        <h3>💻 Engineering</h3>
+        <p>Programming principles, patterns, and lessons learned through building.</p>
+      </a>
+      <!--
+      <a href="/sections/life/" class="section-card">
+        <h3>🌱 Life Notes</h3>
+        <p>Personal reflections, experiences, and philosophies for living deliberately.</p>
+      </a>
+      <a href="/sections/life/" class="section-card">
+        <h3>🎮 Gaming</h3>
+        <p>Reviews, guides, and information about interesting video games.</p>
+      </a>
+    -->
+    </div>
+  </section>
+</main>
+
+
+    <footer>
+      
+          <!-- YouTube SVG -->
+  <a href="https://www.youtube.com/channel/UCYtU31c9jw4g7tFzDt1MGLw" target="_blank" class="youtube">
+    <svg viewBox="0 0 24 24">
+      <path d="M19.615 3.184C18.79 2.936 12 2.936 12 2.936s-6.79 0-7.615.248C3.28 3.431 2.922 4.238 2.922 6.01v11.978c0 1.773.358 2.58 1.463 2.826C5.21 21.064 12 21.064 12 21.064s6.79 0 7.615-.25c1.105-.247 1.463-1.053 1.463-2.827V6.01c0-1.772-.358-2.58-1.463-2.826zM10 15.5v-7l6 3.5-6 3.5z"/>
+    </svg>
+  </a>
+
+  <!-- GitHub SVG -->
+  <a href="https://github.com/Sirpip91" target="_blank" class="github">
+    <svg viewBox="0 0 24 24">
+      <path d="M12 0C5.37 0 0 5.373 0 12c0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.334-1.756-1.334-1.756-1.09-.745.082-.73.082-.73 1.205.085 1.84 1.238 1.84 1.238 1.07 1.834 2.807 1.304 3.492.997.108-.775.42-1.305.763-1.605-2.665-.303-5.467-1.333-5.467-5.932 0-1.31.467-2.382 1.235-3.222-.123-.303-.536-1.523.117-3.176 0 0 1.008-.322 3.3 1.23a11.52 11.52 0 0 1 3-.403c1.02.005 2.045.138 3 .403 2.288-1.552 3.294-1.23 3.294-1.23.656 1.653.243 2.873.12 3.176.77.84 1.232 1.912 1.232 3.222 0 4.61-2.807 5.625-5.48 5.922.431.372.815 1.103.815 2.222v3.293c0 .32.216.694.825.576C20.565 21.796 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+    </svg>
+  </a>
+        <p>&copy; 2025 bradleydallen</p>
+    </footer>
+</body>
+</html>
